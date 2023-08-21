@@ -1,0 +1,105 @@
+button,
+.button {
+    &:focus-visible {
+        outline: Highlight auto 1px;
+        outline-offset: 1px;
+    }
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-width: 1px;
+    border-style: solid;
+    border-color: transparent;
+    font-family: "Outfit";
+    font-size: 14px;
+    line-height: normal;
+    background-color: transparent;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    font-style: normal;
+    transition-duration: 0.3s;
+    transition-property: background-color, color, opacity;
+    transition-timing-function: ease;
+    box-shadow: unset;
+    position: relative;
+    padding: 0;
+
+    .spinner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 2;
+        width: 30px;
+        height: 30px;
+        margin-top: -15px;
+        margin-left: -15px;
+
+        & .path {
+            stroke-width: 4px;
+            stroke: $primary-background-color;
+            stroke-linecap: round;
+        }
+    }
+
+    &[disabled],
+    &.disabled {
+        opacity: 0.5;
+        cursor: default;
+        pointer-events: none;
+    }
+
+    .spinner-wrapper {
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    &.loading {
+        .inner-text {
+            visibility: hidden;
+            opacity: 1;
+        }
+
+        .spinner-wrapper {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .spinner {
+            animation: rotate 2s linear infinite;
+
+            & .path {
+                animation: dash 2s linear infinite;
+            }
+        }
+    }
+
+    .inner-text {
+        pointer-events: none;
+    }
+
+    &.button--default {
+        padding: 17px;
+    }
+
+    &.button--arrow {
+        background-color: $tertiary-button-background;
+        color: $secondary-button-text-color;
+        padding: 16px;
+        min-width: 44px;
+        max-width: 44px;
+        min-height: 44px;
+        max-height: 44px;
+
+        @include breakpoint(large) {
+            padding: 19px;
+            min-width: 61px;
+            max-width: 61px;
+            min-height: 61px;
+            max-height: 61px;
+        }
+    }
+}

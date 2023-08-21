@@ -1,0 +1,52 @@
+{%- comment -%}
+
+    @params
+
+    variant         - { variant object } *required
+    form_id         - {}
+{%- endcomment -%}
+
+{%- comment -%}
+---------------------------------------------------------------------
+PRODUCT PRICE COMPONENT
+---------------------------------------------------------------------
+    variant             - {variant object} *required
+{%- endcomment -%}
+
+{%- assign variant_price = variant.price | default: 10000 -%}
+{%- assign discount_value = blank -%}
+
+{%- if variant.compare_at_price > variant_price -%}
+    {%- assign discount_value = variant_price | times: 100 | divided_by: variant.compare_at_price | minus: 100 | abs -%}
+{%- endif -%}
+
+<product-price data-form-id="{{- form_id -}}" class="main-product__price-wrapper">
+    <div>
+        <div class="main-product__price-top">
+            <span class="main-product__price-text main-product__price-text--primary" data-price>
+                {%- render "price", price_value: variant_price -%}
+            </span>
+
+            <span class="main-product__price-text main-product__price-text--throught {%- unless variant.compare_at_price > variant.price -%} hidden{% endunless %}" data-compare-at-price>
+                {%- render "price", price_value: variant.compare_at_price -%}
+            </span>
+        </div>
+            
+        {%- assign unit_price_measurement = variant.unit_price_measurement -%}
+
+        {%- if unit_price_measurement.reference_value != 1 -%}
+            {%- assign reference_value = unit_price_measurement.reference_value -%}
+        {%- endif -%}
+
+        <span class="{% unless variant.unit_price_measurement != blank %} hidden{% endunless %}" data-unit-price>{{- variant.unit_price | money -}}/{{ reference_value }}{{ unit_price_measurement.reference_unit }}</s>
+    </div>
+
+    <p class="main-product__discount weight weight--medium {%- if discount_value == blank %} hidden{%- endif -%}" data-discount-value-wrapper>
+        <span>
+            Saved
+        </span>
+        <span data-discount-value>
+            {{- discount_value -}}%
+        </span>
+    </p>
+</product-price>

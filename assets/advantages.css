@@ -1,0 +1,24 @@
+.advantages {
+  background: #F6F5F3;
+}
+.advantages .advantages__list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 98px;
+  padding: 62px 20px 75px;
+}
+.advantages .advantages__item,
+.advantages .advantages__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.advantages .advantages__item {
+  gap: 15px;
+  max-width: 232px;
+}
+.advantages .advantages__content {
+  gap: 10px;
+}

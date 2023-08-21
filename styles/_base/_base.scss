@@ -1,0 +1,130 @@
+@import "variables";
+@import "reset";
+@import "fonts";
+@import "typography";
+@import "rte";
+@import "animations";
+
+* {
+	outline: none;
+	box-sizing: border-box;
+}
+
+html,
+body {
+	background-color: #fff;
+	scroll-behavior: smooth;
+}
+
+main {
+	flex-grow: 1;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+.content {
+	flex: 1 0 auto;
+
+	&.content--column {
+		display: flex;
+		flex-direction: column;
+	}
+}
+
+svg.icon {
+}
+
+.visually-hidden {
+	position: absolute;
+	clip: rect(0 0 0 0);
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+}
+
+.hidden {
+	display: none !important;
+}
+
+picture {
+	img {
+		
+	}
+}
+
+.lazy {
+	img {
+	}
+}
+
+.container {
+	width: 100%;
+	display: block;
+	margin: 0 auto;
+	padding: 0 20px;
+
+	&.container--full-width {
+		max-width: 100%;
+	}
+
+	&.container--no-padding {
+		padding-left: 0;
+		padding-right: 0;
+	}
+}
+
+.row {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.placeholder-image {
+	border: 1px solid $placeholder-outline;
+	background-color: $placeholder-background;
+}
+
+.stretched-link {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+}
+
+@include breakpoint(medium) {
+	.container {
+		&.container--full-width {
+			max-width: 100%;
+		}
+
+		&.container--no-padding {
+			padding-left: 0;
+			padding-right: 0;
+		}
+	}
+}
+
+@include breakpoint(large) {
+	.container {
+		max-width: 1330px;
+	}
+}
+
+.skip-to-content-link:focus {
+	position: inherit;
+	z-index: 9999;
+	overflow: auto;
+	clip: auto;
+	width: auto;
+	height: auto;
+	margin: 10px;
+}
+
+.text-upper {
+	text-transform: uppercase;
+}

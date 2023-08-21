@@ -1,0 +1,28 @@
+{
+  "name": "shopify-theme-3",
+  "version": "1.0.0",
+  "description": "empty",
+  "main": "index.js",
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "gulp-filter": "^7.0.0",
+    "gulp-sass": "^5.1.0",
+    "node": "^14.20.0",
+    "sass": "^1.63.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "gulp watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crocodedev/shopify-theme-3.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/crocodedev/shopify-theme-3/issues"
+  },
+  "homepage": "https://github.com/crocodedev/shopify-theme-3#readme"
+}

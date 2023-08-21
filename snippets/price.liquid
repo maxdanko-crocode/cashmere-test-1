@@ -1,0 +1,6 @@
+{%- if settings.currency_code_enabled -%}
+	{%- assign price_value = price_value | money_with_currency -%}
+{%- else -%}
+	{%- assign price_value = price_value | money -%}
+{%- endif -%}
+{{ price_value }}

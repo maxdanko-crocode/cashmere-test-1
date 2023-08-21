@@ -1,0 +1,102 @@
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes dash {
+    0% {
+        stroke-dasharray: 1, 150;
+        stroke-dashoffset: 0;
+    }
+
+    50% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -45;
+    }
+
+    100% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -120;
+    }
+}
+
+@keyframes animation-move-right {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+  
+    1% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+  
+    99% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+}
+
+@keyframes animation-move-top-centered {
+    from {
+      transform: translate(-50%, 0);
+      opacity: 0;
+    }
+  
+    1% {
+      transform: translate(-50%, 0);
+      opacity: 0;
+    }
+  
+    99% {
+      transform: translate(-50%, -50%);
+      opacity: 1;
+    }
+  
+    to {
+      transform: translate(-50%, -50%);
+      opacity: 1;
+    }
+}
+
+@keyframes animation-opacity {
+    from {
+      opacity: 0;
+    }
+  
+    1% {
+      opacity: 0;
+    }
+  
+    99% {
+      opacity: 1;
+    }
+  
+    to {
+      opacity: 1;
+    }
+}
+
+@keyframes animation-opacity-backdrop {
+    from {
+      opacity: 0;
+    }
+  
+    1% {
+      opacity: 0;
+    }
+  
+    99% {
+      opacity: 0.5;
+    }
+  
+    to {
+      opacity: 0.5;
+    }
+}

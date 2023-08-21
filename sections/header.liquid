@@ -1,0 +1,142 @@
+{{- "header.css" | asset_url | stylesheet_tag -}}
+
+{%- assign link_list            = section.settings.link_list -%}
+{%- assign image_logo           = section.settings.image_logo -%}
+{%- assign svg_logo             = section.settings.svg_logo -%}
+{%- assign logo_width_mobile    = section.settings.logo_width_mobile -%}
+{%- assign logo_width           = section.settigns.logo_width -%}
+
+{%- capture logo -%}
+    {%- capture logo_styles -%}
+        --header-logo-width-mobile: {{ section.settings.logo_width_mobile -}}px;
+        --header-logo-width-desktop: {{ section.settings.logo_width }}px;
+    {%- endcapture -%}
+
+    <a class="header-logo__link" href="{{- routes.root_url -}}" style="{{- logo_styles | escape -}}">
+        {%- if svg_logo != blank -%}
+            {{- svg_logo -}}
+        {%- elsif image_logo != blank -%}
+            <picture>
+                <img src="{{- image_logo | img_url: '200x'-}}" alt="{{- image_logo.alt -}}">
+            </picture>
+        {%- else -%}
+            <p>
+                {{- shop.name -}}
+            </p>
+        {%- endif -%}
+    </a>
+{%- endcapture -%}
+
+<header class="header container">
+    <div class="header-top">
+        <div class="header-search">
+            <form class="header-search__form" action="{{- routes.search_url -}}" method="get" role="search" id="header-search-form">
+                <button class="header-search__button button" type="submit" value="">
+                    <div class="header-search__button-icon">
+                        {% render 'icon-magnify' %}
+                    </div>
+                </button>
+                <label class="header-search__field-wrapper">
+                    <input class="header-search__field" 
+                        type="search"
+                        value=""
+                        name="q"
+                        required
+                        placeholder="What are you looking for?"
+                    >
+                </label>
+            </form>
+        </div>
+        <div class="header-logo">
+            {{- logo -}}
+        </div> 
+        <div class="header-static">
+            <a class="header-static__item" href="#">
+                <div class="header-static__item-icon">
+                    {% render 'icon-locator' %}
+                </div>
+                <p class="header-static__item-text">
+                    Locations
+                </p>
+            </a>
+            <a class="header-static__item" href="#">
+                <div class="header-static__item-icon">
+                    {% render 'icon-heart' %}
+                </div>
+            </a>
+            <a class="header-static__item" href="#">
+                <div class="header-static__item-icon">
+                    {% render 'icon-account' %}
+                </div>
+                <p class="header-static__item-text">
+                    Account
+                </p>
+            </a>
+            <a class="header-static__item" href="#">
+                <div class="header-static__item-icon">
+                    {% render 'icon-cart' %}
+                </div>
+                <p class="header-static__item-text">
+                    Cart({{- cart.currency.symbol -}})
+                </p>
+            </a>
+        </div>       
+    </div>
+    <div class="header-bottom">
+        <ul class="header-bottom__list">
+            {%- for link in link_list.links -%}
+                <li class="header-bottom__list-item">
+                    <a class="header-bottom-list-item__link" href="{{- link.url -}}">
+                        {{- link.title -}}
+                    </a>
+                </li>
+            {%- endfor -%}
+        </ul>
+    </div>
+</header>
+
+{% schema %}
+    {
+        "name": "Header",
+        "settings": [
+            {
+                "type": "link_list",
+                "id": "link_list",
+                "label": "Link list",
+                "default": "main-menu"
+            },
+            {
+                "type": "image_picker",
+                "id": "image_logo",
+                "label": "Logo image"
+            },
+            {
+                "type": "html",
+                "id": "svg_logo",
+                "label": "Logo SVG Icon"
+            },
+            {
+                "type": "range",
+                "id": "logo_width_mobile",
+                "label": "Logo width(mobile)",
+                "info": "Applied on resolutions less 992px",
+                "unit": "px",
+                "min": 50,
+                "max": 100,
+                "step": 5,
+                "default": 90
+            },
+            {
+                "type": "range",
+                "id": "logo_width",
+                "label": "Logo width(desktop)",
+                "info": "Applied on resolutions more then 992px",
+                "unit": "px",
+                "min": 100,
+                "max": 200,
+                "step": 5,
+                "default": 100
+            }
+        ]
+    }
+{% endschema %}

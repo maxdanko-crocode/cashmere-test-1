@@ -1,0 +1,104 @@
+.header .header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 15px;
+  padding-bottom: 11px;
+  gap: 10px;
+  border-bottom: 1px solid #F6F5F3;
+}
+.header .header-search:not(.header-search--mobile) {
+  display: none;
+}
+@media (min-width: 992px) {
+  .header .header-search:not(.header-search--mobile) {
+    display: block;
+  }
+}
+.header .header-search__form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.header .header-search__button {
+  margin-left: 6px;
+}
+.header .header-search__button-icon {
+  display: flex;
+}
+.header .header-logo__link {
+  display: flex;
+  width: 100%;
+  height: auto;
+  max-width: var(--header-logo-width-mobile, 80px);
+}
+@media (min-width: 992px) {
+  .header .header-logo__link {
+    max-width: var(--header-logo-width-desktop, 100px);
+  }
+}
+.header .header-search__field {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: normal;
+  appearance: none;
+  border: none;
+}
+.header .header-static {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+@media (min-width: 992px) {
+  .header .header-static {
+    gap: 20px;
+  }
+}
+.header .header-static__item {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+@media (min-width: 992px) {
+  .header .header-static__item {
+    gap: 8px;
+  }
+}
+.header .header-static__item-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  max-width: 20px;
+  height: 20px;
+  width: 100%;
+}
+.header .header-static__item-text {
+  display: none;
+}
+@media (min-width: 992px) {
+  .header .header-static__item-text {
+    display: block;
+  }
+}
+.header .header-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #F6F5F3;
+}
+.header .header-bottom__list {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  overflow: auto;
+}
+.header .header-bottom__list-item {
+  font-size: 15px;
+  display: flex;
+}
+.header .header-bottom-list-item__link {
+  text-decoration: none;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}

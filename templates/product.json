@@ -1,0 +1,74 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {
+      }
+    },
+    "related": {
+      "type": "related-products",
+      "settings": {
+      }
+    },
+    "featured": {
+      "type": "featured-products",
+      "settings": {
+      }
+    },
+    "instagram": {
+      "type": "instagram",
+      "settings": {
+      }
+    },
+    "advantages": {
+      "type": "advantages",
+      "blocks": {
+        "block-1": {
+          "type": "advantage",
+          "settings": {
+            "image_svg": "<svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"25\" height=\"24\" viewbox=\"0 0 25 24\" fill=\"none\">\n  <path d=\"M6.5 19.5C7.60455 19.5 8.5 18.6046 8.5 17.5C8.5 16.3954 7.60455 15.5 6.5 15.5C5.39543 15.5 4.5 16.3954 4.5 17.5C4.5 18.6046 5.39543 19.5 6.5 19.5Z\" stroke=\"#333333\" stroke-linejoin=\"round\"><\/path>\n  <path d=\"M18 19.5C19.1046 19.5 20 18.6046 20 17.5C20 16.3954 19.1046 15.5 18 15.5C16.8954 15.5 16 16.3954 16 17.5C16 18.6046 16.8954 19.5 18 19.5Z\" stroke=\"#333333\" stroke-linejoin=\"round\"><\/path>\n  <path d=\"M4.5 17.5H1.5V5.5H16V17.5H8.5\" stroke=\"#333333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n  <path d=\"M16 17.5V9H20.2857L23.5 13.25V17.5H20.4056\" stroke=\"#333333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<\/svg>",
+            "title": "FREE SHIPPING",
+            "description": "Free U.S. shipping on orders over $99, in other Countries on orders $200+"
+          }
+        },
+        "block-2": {
+          "type": "advantage",
+          "settings": {
+            "image_svg": "<svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\">\n  <path d=\"M3 4.62782L12.0043 2L21 4.62782V10.0169C21 15.6811 17.3751 20.7097 12.0013 22.5002C6.62605 20.7097 3 15.68 3 10.0143V4.62782Z\" stroke=\"#333333\" stroke-linejoin=\"round\"><\/path>\n  <path d=\"M7.5 11.5L11 15L17 9\" stroke=\"#333333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<\/svg>",
+            "title": "EASY RETURNS",
+            "description": "Enjoy 90 day exchanges & returns on all orders."
+          }
+        },
+        "block-3": {
+          "type": "advantage",
+          "settings": {
+            "image_svg": "<svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\">\n  <path d=\"M16.5 19H11V15H18V11H22V19H19.5L18 20.5L16.5 19Z\" stroke=\"#333333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n  <path d=\"M2 3H18V15H8.5L6.5 17L4.5 15H2V3Z\" stroke=\"#333333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n  <path d=\"M9.5 9H10\" stroke=\"#333333\" stroke-linecap=\"round\"><\/path>\n  <path d=\"M13 9H13.5\" stroke=\"#333333\" stroke-linecap=\"round\"><\/path>\n  <path d=\"M6 9H6.5\" stroke=\"#333333\" stroke-linecap=\"round\"><\/path>\n<\/svg>",
+            "title": "CUSTOMER SERVICE",
+            "description": "Need help? Email us at contact@thecashmeresale.com"
+          }
+        },
+        "block-4": {
+          "type": "advantage",
+          "settings": {
+            "image_svg": "<svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\">\n  <path d=\"M12 22C17.5229 22 22 17.5229 22 12C22 6.47715 17.5229 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5229 6.47715 22 12 22Z\" stroke=\"#333333\"><\/path>\n  <path d=\"M2 10.42C3.50742 9.70816 4.62233 9.60901 5.3447 10.1225C6.4283 10.8927 6.56415 14.0318 9.02875 12.5315C11.4934 11.0313 7.97335 10.42 8.7375 8.24671C9.50165 6.07346 12.0041 7.76161 12.2529 5.38111C12.4187 3.79407 10.5204 3.18682 6.5578 3.55936\" stroke=\"#333333\"><\/path>\n  <path d=\"M18.0002 4C15.143 6.4943 14.1451 8.00055 15.0065 8.51865C16.2985 9.29585 16.8468 8.20165 18.4235 8.51865C20.0002 8.8357 19.6588 10.9728 18.8295 10.9728C18.0002 10.9728 13.7051 10.4259 13.9215 12.9325C14.1378 15.439 16.7212 15.8102 16.7212 17.2106C16.7212 18.1442 16.1496 19.573 15.0065 21.4971\" stroke=\"#333333\" stroke-linecap=\"round\"><\/path>\n  <path d=\"M3.05225 16.463C3.50799 16.2642 3.85058 16.1185 4.08 16.0258C6.00355 15.2487 7.43085 15.0655 8.3618 15.4763C10.0081 16.2027 9.37515 17.6698 9.8908 18.2103C10.4064 18.7508 11.694 18.5936 11.694 19.6218C11.694 20.3073 11.4638 21.0816 11.0033 21.9448\" stroke=\"#333333\" stroke-linecap=\"round\"><\/path>\n<\/svg>",
+            "title": "WORLDWIDE SHIPPING",
+            "description": "We ship to all countries worldwide! Excludes Russia."
+          }
+        }
+      },
+      "block_order": [
+        "block-1",
+        "block-2",
+        "block-3",
+        "block-4"
+      ]
+    }
+  },
+  "order": [
+    "main",
+    "related",
+    "featured",
+    "instagram",
+    "advantages"
+  ]
+}

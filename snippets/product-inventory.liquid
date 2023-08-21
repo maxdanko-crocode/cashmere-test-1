@@ -1,0 +1,22 @@
+{%- comment -%}
+
+    @params
+    variant -- variant object 
+{%- endcomment -%}
+
+<product-inventory data-form-id="{{- form_id -}}" class="main-product__margin-top">
+    {%- if variant.available -%}
+        {%- if variant.inventory_management and variant.inventory_policy == 'deny' -%}
+            {%- capture quantity -%}
+                <span class="main-product__text main-product__text--tertiary">{{- "sections.product.inventory.available" | t: quantity: variant.inventory_quantity -}}</span>
+            {%- endcapture -%}
+            <span data-quantity-wrapper>{{- "sections.product.inventory.in_stock_quantity_html" | t: quantity: quantity -}}</span>
+        {%- else -%}
+            {%- if variant.inventory_quantity <= 0 -%}
+                <span class="main-product__text main-product__text--tertiary" data-quantity-wrapper>{{- "sections.product.inventory.in_stock" | t -}}</span>
+            {%- endif -%}
+        {%- endif -%}
+    {%- else -%}
+        <span data-quantity-wrapper>{{- "sections.product.inventory.out_of_stock" | t -}}</span>
+    {%- endif -%}
+</product-inventory>

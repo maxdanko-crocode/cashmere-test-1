@@ -1,0 +1,214 @@
+{{- "main-product.css" | asset_url | stylesheet_tag -}}
+
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign size_guide = section.settings.size_guide -%}
+{%- assign blocks = section.blocks -%}
+
+{%- capture product_form_id -%}product-form-{{ product.id }}-{{ section.id }}{%- endcapture -%}
+{%- capture collapsible_rows -%}{%- endcapture -%}
+
+{%- assign blocks_collapsible = blocks | where: 'type', 'collapsible_row' -%}
+{%- for block in blocks_collapsible -%}
+    {%- capture collapsible_row -%}
+        {%- assign collapsible_row_title = block.settings.collapsible_row_title -%}
+        {%- assign collapsible_row_content = block.settings.collapsible_row_content -%}
+
+        <div class="main-product__collapse-row" data-dropdown-container>
+            <details class="main-product__collapse-row-opener"
+                     id="{{- block.id -}}-dropdown-opener"
+                     data-dropdown-opener
+            >
+                <summary class="main-product-collapse-row-opener__text">
+                                        <span class="subtitle subtitle--weight-medium">
+                                            {{- collapsible_row_title -}}
+                                        </span>
+                    <span class="main-product-collapse-row-opener__icon-wrapper"></span>
+                </summary>
+            </details>
+            <div class="main-product-collapse-row__content">
+                <div class="rte">
+                    {{- collapsible_row_content -}}
+                </div>
+            </div>
+        </div>
+    {%- endcapture -%}
+
+    {%- assign collapsible_rows = collapsible_rows | append: collapsible_row -%}
+{%- endfor -%}
+
+<section class="main-product">
+    {%- render "product-gallery",
+            product: product,
+            product_form_id: product_form_id
+    -%}
+
+    <div class="main-product__wrapper">
+        <div class="main-product__wrapper-inner">
+            <div class="main-product__row">
+                <p class="text-apper">
+                    {{- product.vendor -}}
+                </p>
+                <button class="button" type="button">
+                    {% render 'icon-heart' %}
+                </button>
+            </div>
+
+            <h4 class="main-product__title">
+                {{- product.title -}}
+            </h4>
+
+            {%- form "product", product, class: "main-product__form", id: product_form_id -%}
+                <div class="main-product__row main-product__prices">
+                    {%- render "product-price", variant: current_variant, form_id: product_form_id -%}
+
+                    {%- render "product-inventory", variant: current_variant, form_id: product_form_id -%}
+                </div>
+
+                {%- render "product-options",
+                        product: product,
+                        options: product.options_with_values,
+                        current_variant: current_variant,
+                        size_guide: size_guide,
+                        form_id: product_form_id,
+                        change_history_state: true,
+                        section: section
+                -%}
+
+                <noscript>
+                    <select name="id" class="no-js">
+                        {% for variant in product.variants %}
+                            <option
+                                    {% if variant == current_variant %}selected="selected"{% endif %}
+                                {% unless variant.available %}disabled="disabled"{% endunless %}
+                                    value="{{ variant.id }}"
+                            >
+                                {{ variant.title }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </noscript>
+
+                {%- if current_variant.available -%}
+                    {%- if current_variant.inventory_management and current_variant.inventory_policy == 'deny' -%}
+                        {%- assign current_variant_inventory = current_variant.inventory_quantity -%}
+                    {%- else -%}
+                        {%- if current_variant.inventory_quantity <= 0 -%}
+                            {%- assign current_variant_inventory = null -%}
+                        {%- endif -%}
+                    {%- endif -%}
+                {%- endif -%}
+
+                <div class="main-product__counter--wrapper">
+                    <span class="main-product__option-title extra-small text-upper">
+                        <span>Quantity:</span>
+                    </span>
+                    <div class="main-product__counter">
+                        {%- render "quantity-selector",
+                                max_value: current_variant_inventory,
+                                form_id: product_form_id,
+                                section: section
+                        -%}
+
+                        {%- assign show_dynamic_buttons = block.settings.show_dynamic_buttons -%}
+                        <buy-buttons class="main-product__buy-buttons" data-form-id="{{- product_form_id -}}">
+                            <p class="hidden" data-error-message></p>
+                            <div class="main-product-buy-buttons__top">
+                                <button class="main-product-buy-buttons__button button" type="submit" data-add-to-cart>
+                                    {{- "sections.product.buttons.add_to_cart" | t -}}
+                                </button>
+
+                                {%- if show_dynamic_buttons -%}
+                                    <div class="main-product__payment-button">
+                                        {{- form | payment_button -}}
+                                    </div>
+                                {%- endif -%}
+                            </div>
+
+                            {{ form | payment_terms }}
+                        </buy-buttons>
+                    </div>
+                </div>
+            {%- endform -%}
+
+            {%- if collapsible_rows != blank -%}
+                <div class="main-product__collapsible-rows">
+                    {{- collapsible_rows -}}
+                </div>
+            {%- endif -%}
+        </div>
+
+    </div>
+
+    {%- if product != blank -%}
+        {%- assign variants_json = "" -%}
+        {%- for variant in product.variants -%}
+            {%- if variants_json != "" -%}
+                {%- assign variants_json = variants_json | append: "," -%}
+            {%- endif -%}
+
+            {%- capture variant_json -%}
+                {%- render 'product-variant-json' with variant: variant -%}
+            {%- endcapture -%}
+
+            {%- if variant_json == "null" -%}
+                {%- continue -%}
+            {%- endif -%}
+
+            {%- assign variants_json = variants_json | append: variant_json -%}
+        {%- endfor -%}
+
+        <script type="application/json" data-product-object>
+            {   
+                "available": {{ product.available | json }},
+                "compared_at_price": {{- product.compared_at_price | json -}},
+                "current_variant": {%- render 'product-variant-json' with variant: product.selected_or_first_available_variant -%},
+                "description": {{- product.description | json -}},
+                "first_available_variant": {%- render 'product-variant-json' with variant: product.first_available_variant -%},
+                "handle": {{- product.handle | json -}},
+                "has_only_default_variant": {{- product.has_only_default_variant | json -}},
+                "options": {{- product.options_with_values | json -}},
+		        "options_with_values": {{- product.options_with_values | json -}},
+                "url": {{- product.url | json -}},
+		        "id": {{- product.id | json -}},
+                "3d_media": {{- product.media | where: "media_type", "model" | json -}},
+                "price": {{- product.price | json -}},
+                "price_max": {{- product.price_max | json -}},
+                "price_min": {{- product.price_min | json -}},
+                "price_varies": {{- product.price_varies | json -}},
+                "tags": {{- product.tags | json -}},
+                "title": {{- product.title | json -}},
+                "type": {{- product.type | json -}},
+                "variants": [{{- variants_json -}}],
+                "vendor": {{- product.vendor | json -}}
+            }
+
+        </script>
+    {%- endif -%}
+</section>
+
+{% schema %}
+{
+    "name": "Product information",
+    "settings": [],
+    "blocks": [
+        {
+            "type": "collapsible_row",
+            "name": "t:sections.main-product.blocks.collapsible_row.name",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "collapsible_row_title",
+                    "label": "t:sections.main-product.blocks.collapsible_row.settings.collapsible_row_title.label",
+                    "default": "Collapsible row"
+                },
+                {
+                    "type": "richtext",
+                    "id": "collapsible_row_content",
+                    "label": "t:sections.main-product.blocks.collapsible_row.settings.collapsible_row_content.label",
+                    "default": "<p>Share information about your brand.</p>"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

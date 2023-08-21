@@ -1,0 +1,77 @@
+{{- "advantages.css" | asset_url | stylesheet_tag -}}
+
+{%- liquid
+    assign blocks = section.blocks
+-%}
+
+<div class="advantages">
+    <div class="advantages__list">
+        {% for block in blocks %}
+            {%- liquid
+                assign image = block.settings.image_svg
+                assign image_type = 'svg'
+                if image == blank
+                    assign image = block.settings.image
+                    assign image_type = 'img'
+                endif
+                assign title = block.settings.title
+                assign description = block.settings.description
+            -%}
+
+            <div class="advantages__item">
+                {% if image_type == 'svg' %}
+                    <div class="advantages__img">
+                        {{ image }}
+                    </div>
+                {% elsif image_type == 'img' %}
+                    <img src="{{ image | image_url: width: 24 }}" class="advantages__img">
+                {% endif %}
+                <div class="advantages__content">
+                    <span class="advantages__title">{{ title }}</span>
+                    <span class="advantages__desc">{{ description }}</span>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "t:sections.advantages.name",
+    "blocks": [
+        {
+            "type": "advantage",
+            "name": "t:sections.instagram.blocks.advantage.name",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "t:sections.instagram.blocks.advantage.settings.image.label",
+                    "info": "t:sections.instagram.blocks.advantage.settings.image.info"
+                },
+                {
+                    "type": "textarea",
+                    "id": "image_svg",
+                    "label": "t:sections.instagram.blocks.advantage.settings.image_svg.label",
+                    "info": "t:sections.instagram.blocks.advantage.settings.image_svg.info"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": ":sections.instagram.blocks.advantage.settings.title.label"
+                },
+                {
+                    "type": "textarea",
+                    "id": "description",
+                    "label": ":sections.instagram.blocks.advantage.settings.description.label"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name":"t:sections.advantages.name"
+        }
+    ]
+}
+{% endschema %}

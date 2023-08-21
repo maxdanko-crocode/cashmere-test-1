@@ -1,0 +1,125 @@
+{%- comment -%}
+    @params
+
+    media       - {media object} *required
+{%- endcomment -%}
+
+{%- assign type = media.media_type | default: "placeholder" -%}
+
+{%- case type -%}
+    {%- when "image" -%}
+        <picture>
+            <img
+                alt="{{- media.alt -}}"
+                src="{{- media | image_url: width:  800 -}}"
+                srcset="{{- media | image_url: width:  800 }} 1x, {{ media | image_url: width: 1600 }} 2x"
+            />
+        </picture>
+    {%- when "video", "external_video" -%}
+        <div class="media" data-media>
+            <button class="media-play-button" 
+                data-media-button-play 
+                aria-label="{{- "general.buttons.play_media" | t -}}"
+                tabindex="-1"
+            >
+                <img 
+                    alt="{{- media.alt -}}"
+                    src="{{- media | image_url: width:  800 -}}"
+                    srcset="{{- media | image_url: width:  800 }} 1x, {{ media | image_url: width: 1600 }} 2x"
+                />
+                
+                <div class="media-button-play__icon-wrapper">
+                    {%- render "icon-play" -%}
+                </div>
+            </button>
+            {%- if media.media_type == "video" -%}
+                <template data-media-template>
+                    {{- media | video_tag: 
+                        controls: true, 
+                        playsinline: true, 
+                        muted: "muted", 
+                        autoplay: true, 
+                        loop: loop, 
+                        preload: 'metadata', 
+                        data-media-content: true, 
+                        height: "100%", 
+                        width:"100%" 
+                    -}}
+                </template>
+            {%- else -%}
+                <template data-media-template>
+                    {%- if media.host == "youtube" -%}
+                        {{- media | external_video_url: 
+                            enablejsapi: true, 
+                            loop: loop, 
+                            mute: autoplay, 
+                            autoplay: true 
+                            | external_video_tag: 
+                            data-media-content: true, 
+                            height: "100%", 
+                            width:"100%", 
+                            frameborder:"0" 
+                        }}
+                    {%- elsif media.host == "vimeo" -%}
+                        {{- media | external_video_url: 
+                            autopause: true, 
+                            loop: loop, 
+                            background: autoplay, 
+                            muted: autoplay, 
+                            autoplay: true 
+                            | external_video_tag: 
+                            data-media-content: true, 
+                            height: "100%", 
+                            width:"100%"
+                        -}}
+                    {%- else -%}
+                        {{- media | external_video_tag: image_size: '2048x' -}}
+                    {%- endif -%}
+                </template>
+            {%- endif -%}
+        </div>
+    {%- when "model" -%}
+        <div class="media" data-media>
+            <button class="media-play-button" 
+            data-media-button-play 
+            aria-label="{{- "general.buttons.play_media" | t -}}"
+            tabindex="-1"
+            >
+                <img 
+                    alt="{{- media.alt -}}"
+                    src="{{- media | image_url: width:  800 -}}"
+                    srcset="{{- media | image_url: width:  800 }} 1x, {{ media | image_url: width: 1600 }} 2x"
+                />
+
+                <span class="media-button-play__icon-wrapper">
+                    {% render "icon-3d" %}
+                </span>
+            </button>
+            <template data-media-template>
+                <media-model class="media__model-viewer" 
+                    data-media-content 
+                    data-media-id="{{ media.id }}" 
+                    data-product-title="{{- product.title | escape -}}" 
+                    data-type="swiper-slide-clicable"
+                >
+                    {{- media | model_viewer_tag: image_size: '2048x', reveal: 'auto', toggleable: true, class: "media__model-viewer" -}}
+                
+                    <button class="media__button-view button button--outline" 
+                        data-shopify-model3d-id="{{ media.id }}"
+                        data-shopify-xr 
+                        data-shopify-title="{{- product.title | escape -}}"
+                        data-shopify-xr-hidden
+                    >
+                        <span class="media-button-view__icon-wrapper">
+                            {% render "icon-3d" %}
+                        </span>
+                        <span class="subtitle subtitle--weight-medium">
+                            {{- "sections.product.gallery.view_in_space" | t -}}
+                        </span>
+                    </button>
+                </media-model>
+            </template>
+        </div>
+    {%- when "placeholder" -%}
+        {{- placeholder | placeholder_svg_tag: "placeholder-image" -}}
+{%- endcase -%}

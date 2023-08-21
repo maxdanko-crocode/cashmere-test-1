@@ -1,0 +1,67 @@
+{{- "related-products.css" | asset_url | stylesheet_tag -}}
+
+{%- liquid
+  assign heading                  = section.settings.heading
+  assign products_to_show         = section.settings.products_to_show
+-%}
+
+{%- capture products_list -%}
+  {% for recommended_product in recommendations.products limit: products_to_show %}
+    {%- render "product-card", product: recommended_product -%}
+  {% endfor %}
+{%- endcapture -%}
+
+<section class="related-products">
+  <product-recommendations
+          class="container related-products__container"
+          data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ products_to_show }}"
+  >
+    <div class="related-products__wrapper">
+      <div class="related-products__top-row">
+        <h2 class="related-products__heading">
+          {{- heading -}}
+        </h2>
+      </div>
+
+      <div class="related-products__list">
+        {{- products_list -}}
+      </div>
+
+      <div class="related-products__footer">
+        <a href="#" class="related-products__button">
+          SHOP ALL
+        </a>
+      </div>
+    </div>
+  </product-recommendations>
+</section>
+{% schema %}
+{
+  "name": "related-products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.related-products.settings.heading.label",
+      "default": "You may also like"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "default": 5,
+      "label": "t:sections.related-products.settings.products_to_show.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.related-products.name"
+    }
+  ],
+  "enabled_on": {
+    "templates": ["product"]
+  }
+}
+{% endschema %}

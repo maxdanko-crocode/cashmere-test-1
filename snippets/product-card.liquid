@@ -1,0 +1,121 @@
+{%- comment -%}
+    @params
+    
+    product                     - { product object } *required
+{%- endcomment -%}
+
+{%- liquid
+    assign current_variant = product.selected_or_first_available_variant
+    assign image = product.featured_media.preview_image
+    assign secondary_image = product.media[1].preview_image
+    assign product_card_tags = settings.product_card_tags | newline_to_br | split: '<br />'
+    assign product_title = product.title | default: "Example product title"
+-%}
+
+<div class="product-card">
+    <div class="product-card__top">
+        <div class="product-card__badges">
+
+            <button class="product-card__wishlist">
+                {%- render "icon-heart" -%}
+            </button>
+        </div>
+        
+        <a href="{{- product.url -}}" tabindex="-1">
+            <div class="product-card__image-wrapper">
+                {%- if image != blank -%}
+                    <picture>
+                        <img class="product-card__image product-card__image--primary"
+                            alt="{{- image.alt -}}"
+                            src="{{- image | image_url: width:  358 -}}"
+                            srcset="{{- image | image_url: width:  358 }} 1x, {{ image | image_url: width:  716 }} 2x"
+                        />
+                    </picture>
+
+                    {%- if secondary_image != blank -%}
+                        <picture>
+                            <img class="product-card__image product-card__image--secondary"
+                                alt="{{- secondary_image.alt -}}"
+                                src="{{- secondary_image | image_url: width:  358 -}}"
+                                srcset="{{- secondary_image | image_url: width:  358 }} 1x, {{ secondary_image | image_url: width:  716 }} 2x"
+                            />
+                        </picture>
+                    {%- endif -%}
+                {%- else -%}
+                    {{- "product-1" | placeholder_svg_tag: "placeholder-image product-card__image" -}}
+                {%- endif -%}
+            </div>
+        </a>
+
+        <a href="{{- product.url -}}" class="button button--secondary product-card__quick-view">
+            {{- "general.buttons.quick_view" | t -}}
+        </a>
+    </div>
+
+    <div class="product-card__bottom">
+        <a href="{{- product.url -}}" class="product-card__title">
+            {{- product_title -}}
+        </a>
+
+        <div class="product-card__price-wrapper">
+            {%- liquid
+                assign price = current_variant.price
+                assign compare_at_price = current_variant.compare_at_price
+            -%}
+            
+            {%- unless current_variant != blank -%}
+                {%- liquid
+                    assign price = 1000
+                -%}
+            {%- endunless -%}
+
+            <p class="product-card__price">
+                <span {% if compare_at_price > price -%}class="product-card__price--actual-at-price"{%- endif -%}>{{- price | money -}}</span>
+
+                {%- if compare_at_price > price -%}
+                    <span class="product-card__price--compare-at-price">{{- compare_at_price | money -}}</span>
+                {%- endif -%}
+            </p>
+
+            <div class="product-card__option">
+                {%- if size_label contains option_downcased and size_guide != blank -%}
+                    <button-open-modal>
+                        <button class="product-card__option-title product-card__option-title--button" type="button" data-modal-open-button="modal-size-guide--{{- section.id -}}">
+                            <span class="product-card-option-title__icon-wrapper">
+                                {% render 'icon-ruler' %}
+                            </span>
+                            <span>
+                            {{- "sections.product.size_guide.heading" | t -}}
+                            </span>
+                        </button>
+                    </button-open-modal>
+                {%- endif -%}
+
+                <ul class="product-card__option-list">
+                    {% assign option = blank %}
+                    {%- assign color_labels = 'color,colour,couleur,cor,colore,farbe,색,色,カラー,färg,farve,szín,barva' | split: ',' -%}
+                    {% for option_with_values in product.options_with_values %}
+                        {%- assign option_downcased = option_with_values.name | downcase -%}
+                        {% if color_labels contains option_downcased %}
+                            {% assign option = option_with_values %}
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if option != blank %}
+                        {%- assign color_swatches_config = settings.color_swatches_config | newline_to_br | split: '<br />'-%}
+                        {% for value in option.values %}
+                            <li>
+                                    <div class="product-card__option-label product-card__option-label--color"
+                                           data-color="{{- value -}}"
+                                           style="{%- render 'swatch', color_value: value, color_swatches_config: color_swatches_config -%}"
+                                    >
+                                        <span class="product-card__option-label-fill"></span>
+                                    </div>
+                            </li>
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

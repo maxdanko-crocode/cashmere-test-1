@@ -1,0 +1,44 @@
+@import "../_utils/utils";
+
+.related-products {
+  padding-top: 40px;
+  padding-bottom: 40px;
+
+  .related-products__wrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 40px;
+  }
+
+  .related-products__list {
+    display: flex;
+    column-gap: 32px;
+  }
+
+  .related-products__heading {
+    text-align: center;
+    font-family: Outfit;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+  }
+
+  .related-products__button {
+    display: block;
+    margin: 0 auto;
+    width: max-content;
+    padding: 17px 35px;
+    align-items: flex-start;
+    gap: 10px;
+    background: rgba(248, 200, 222, 0.50);
+
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+}

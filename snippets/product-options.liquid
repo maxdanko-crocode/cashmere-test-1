@@ -1,0 +1,87 @@
+{%- comment -%}
+    @params
+
+    options - object with options from product
+    current_variant - variant object to disable options
+    form_id         - form.id 
+    change_history_state  - if on option change don't need change browser history state pagse "false" { boolean } 
+{%- endcomment -%}
+
+{%- assign change_history_state = change_history_state | default: false -%}
+{%- assign color_labels = 'color,colour,couleur,cor,colore,farbe,색,色,カラー,färg,farve,szín,barva' | split: ',' -%}
+{%- assign size_label = 'size,taille,größe,tamanho,tamaño,koko,サイズ' | split: ',' -%}
+
+<product-options class="main-product__options{% if product.has_only_default_variant == true %} hidden{% endif %}" 
+    data-form-id="{{- form_id -}}" 
+    data-change-history-state="{{- change_history_state -}}"
+>
+    <input type="hidden" name="id" value="{{- current_variant.id -}}"/>
+    
+    {%- if options.size > 0 and product.has_only_default_variant == false -%}
+        {% for option in options %}
+            {%- assign optionIndex = forloop.index -%}
+            {%- assign option_downcased = option.name | downcase -%}
+            {%- assign current_variant_option = current_variant.options[forloop.index0] -%}
+            
+            {% if color_labels contains option_downcased %}
+                {%- assign color_swatches_config = settings.color_swatches_config | newline_to_br | split: '<br />'-%}
+            {%- endif -%}
+
+            <div class="main-product__option">
+                
+                {%- if size_label contains option_downcased and size_guide != blank -%}
+                    <button-open-modal>
+                        <button class="main-product__option-title main-product__option-title--button" type="button" data-modal-open-button="modal-size-guide--{{- section.id -}}">
+                            <span class="main-product-option-title__icon-wrapper">
+                                {% render 'icon-ruler' %}
+                            </span>
+                            <span>
+                            {{- "sections.product.size_guide.heading" | t -}}
+                            </span>
+                        </button>
+                    </button-open-modal>
+                {%- endif -%}
+
+                <span class="main-product__option-title extra-small text-upper">
+                    <span>
+                        {{- option.name -}}:
+                    </span>
+                </span>
+                <ul class="main-product__option-list">
+                    {% for value in option.values %}
+                        <li>
+                            <input class="main-product__option-radio" 
+                                id="{{- section.id -}}-{{- option.name -}}-{{- value -}}" 
+                                name="{{- option.name -}}" 
+                                type="radio"
+                                data-option="option{{- optionIndex -}}"
+                                value="{{- value -}}"
+                                {%- if option.selected_value == value -%}
+                                    checked
+                                {%- endif -%}    
+                            />
+                            {% if color_labels contains option_downcased %}
+                                <label for="{{- section.id -}}-{{ option.name }}-{{- value -}}" 
+                                    class="main-product__option-label main-product__option-label--color" 
+                                    data-color="{{- value -}}" 
+                                    style="{%- render 'swatch', color_value: value, color_swatches_config: color_swatches_config -%}"
+                                    aria-label="{{- "sections.product.color_option" | t: option: value -}}"
+                                >
+                                    <span class="main-product__option-label-fill"></span>
+                                </label>
+                            {%- else -%}
+                                <label
+                                    for="{{- section.id -}}-{{ option.name }}-{{- value -}}"
+                                    class="main-product__option-label"
+                                    aria-label="{{- "sections.product.size_option" | t: option: value -}}"
+                                >
+                                    {{- value -}}
+                                </label>
+                            {%- endif -%}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+    {%- endif -%}
+</product-options>

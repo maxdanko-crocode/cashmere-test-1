@@ -1,0 +1,65 @@
+{%- comment -%}
+    @params
+
+    product: product object { object } *requiered
+    product_form_id: id of profuct form { text } *requiered
+    product_gallery_variant: [slider, grid, column] { text } *requiered
+    hide_gallery_slider_buttons: hide_gallery_slider_buttons { boolean } *requiered
+{%- endcomment -%}
+
+{%- capture media_slides_html -%}{%- endcapture -%}
+
+{% if product.media.size > 0 %}
+    {% for media in product.media %}
+        {%- capture media_slide_html -%}
+            <div class="main-product-gallery-slider__slide swiper-slide" 
+                data-media-type="{{- media.media_type -}}" 
+                data-media-id="{{- media.id -}}" 
+                data-swiper-slide-index="{{- forloop.index0 -}}"
+                data-outer-container="false" 
+            >
+                {%- render "media", media: media -%}
+            </div>
+        {%- endcapture -%}
+
+        {%- assign media_slides_html = media_slides_html | append: media_slide_html -%}
+    {% endfor %}
+{%- else -%}
+    {% for index in (0..4) %}
+        {%- capture placeholder -%}{% cycle 'product-1', 'product-2', 'product-3', 'product-4', 'product-5', 'product-6' %}{%- endcapture -%}
+            {%- capture media_slide_html -%}
+                <div class="main-product-gallery-slider__slide swiper-slide" 
+                    data-media-type="{{- media.media_type -}}" 
+                    data-media-id="{{- media.id -}}" 
+                    data-swiper-slide-index="{{- forloop.index0 -}}"
+                    data-outer-container="false"
+                >
+                    {%- render "media", placeholder: placeholder -%}
+                </div>
+            {%- endcapture -%}
+            {%- assign media_slides_html = media_slides_html | append: media_slide_html -%}
+    {% endfor %}
+{% endif %}
+
+<slider-component class="main-product-gallery" data-swiper-option-name="main-product-slider" data-selection-container>
+    <div class="main-product-gallery__main" >
+        <div class="main-product-gallery__main-inner" data-selection-target-element>
+            {%- render "media", media: product.featured_media, placeholder: 'product-1' -%}
+        </div>
+
+        <button class="main-product-gallery__button button button--arrow" type="button" data-swiper-button-prev>
+            {% render 'icon-chevron' %}
+        </button>
+        <button class="main-product-gallery__button main-product-gallery__button--next button button--arrow" type="button" data-swiper-button-next>
+            {% render 'icon-chevron' %}
+        </button>
+    </div>
+    <div class="main-product-gallery__slider swiper" 
+        data-swiper-element 
+        data-form-id="{{- product_form_id -}}"
+    >
+        <div class="main-product-gallery__slider-inner swiper-wrapper">
+            {{- media_slides_html -}}
+        </div>
+    </div>
+</slider-component>

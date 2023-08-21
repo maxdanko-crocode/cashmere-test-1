@@ -1,0 +1,90 @@
+{{- "instagram.css" | asset_url | stylesheet_tag -}}
+
+{%- liquid
+    assign sub_heading = section.settings.sub_heading
+    assign heading = section.settings.heading
+    assign max_of_columns = section.settings.max_of_columns
+    assign blocks = section.blocks
+-%}
+
+<div class="instagram">
+    <div class="instagram__header">
+        <a href="#" class="instagram__sub-heading">{{- sub_heading -}}</a>
+        <span class="instagram__heading">{{- heading -}}</span>
+    </div>
+    <div class="instagram__list">
+        {% for block in blocks %}
+            {% assign image = block.settings.image %}
+
+            <div class="instagram__item">
+                <img
+                        srcset="
+            {%- if image.width >= 375 -%}{{ image | image_url: width: 375 }} 375w,{%- endif -%}
+            {%- if image.width >= 750 -%}{{ image | image_url: width: 750 }} 750w,{%- endif -%}
+            {%- if image.width >= 1100 -%}{{ image | image_url: width: 1100 }} 1100w,{%- endif -%}
+            {%- if image.width >= 1500 -%}{{ image | image_url: width: 1500 }} 1500w,{%- endif -%}
+            {%- if image.width >= 1780 -%}{{ image | image_url: width: 1780 }} 1780w,{%- endif -%}
+            {%- if image.width >= 2000 -%}{{ image | image_url: width: 2000 }} 2000w,{%- endif -%}
+            {%- if image.width >= 3000 -%}{{ image | image_url: width: 3000 }} 3000w,{%- endif -%}
+            {%- if image.width >= 3840 -%}{{ image | image_url: width: 3840 }} 3840w,{%- endif -%}
+            {{ image | image_url }} {{ image.width }}w
+          "
+                        sizes="100vw"
+                        src="{{ image | image_url: width: 1500 }}"
+                        loading="lazy"
+                        alt="{{ image.alt | escape }}"
+                        width="{{ image.width }}"
+                        height="{{ image.height }}"
+                >
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "t:sections.instagram.name",
+    "settings": [
+        {
+            "type": "text",
+            "id": "sub_heading",
+            "label": "t:sections.instagram.settings.sub_heading.label",
+            "default": "@thecashmeresale"
+        },
+        {
+            "type": "text",
+            "id": "heading",
+            "label": "t:sections.instagram.settings.heading.label",
+            "default": "Follow us on instagram"
+        },
+        {
+            "type": "range",
+            "id": "max_of_columns",
+            "min": 1,
+            "max": 10,
+            "step": 1,
+            "default": 6,
+            "label": "t:sections.instagram.settings.max_of_columns.label"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "image",
+            "name": "t:sections.instagram.blocks.image.name",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "t:sections.instagram.blocks.image.settings.image.label",
+                    "info": "t:sections.instagram.blocks.image.settings.image.info"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name":"t:sections.instagram.name"
+        }
+    ]
+}
+{% endschema %}

@@ -1,0 +1,35 @@
+//base colors
+$white: #ffffff;
+$black: #000000;
+$placeholder-outline:#a8a8a8;
+$placeholder-background:#e3e3e3;
+
+$z-index-modal: 1001;
+$z-index-modal-backdrop: 1000;
+
+//main colors
+$primary-background-color: #FFFFFF;
+$secondary-background-color: #F6F5F3;
+$tertiary-background-color: #000000;
+
+//text
+$primary-text-color: #000000;
+$secondary-text-color: #FFFFFF;
+$tertiary-text-color: #EC1578;
+
+//buttons background
+$primary-button-background: #000000;
+$secondary-button-background: #F8C8DE;
+$tertiary-button-background: #FFFFFF;
+
+//buttons text color
+$primary-button-text-color: #FFFFFF;
+$secondary-button-text-color: #000000;
+
+//fonts
+$font-body-family: "Outfit";
+$font-body-style: normal;
+
+$font-body-weight-regular: var(--font-body-weight-regular);
+$font-body-weight-light: var(--font-body-weight-light);
+$font-body-weight-medium: var(--font-body-weight-medium);

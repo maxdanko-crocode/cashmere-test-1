@@ -1,0 +1,57 @@
+{%- if variant != blank -%}
+	{%- assign discount_value = blank -%}
+
+	{%- if variant.compare_at_price > variant.price -%}
+		{%- assign discount_value = variant.price | times: 100 | divided_by: variant.compare_at_price | minus: 100 | abs -%}
+	{%- endif -%}
+    {%- capture unit_price_measurement -%}
+        {%- if variant.unit_price_measurement != blank -%}
+            {
+                "measured_type": {{ variant.unit_price_measurement.measured_type | json }},
+                "quantity_value": {{ variant.unit_price_measurement.quantity_value | json }},
+                "quantity_unit": {{ variant.unit_price_measurement.quantity_unit | json }},
+                "reference_unit": {{ variant.unit_price_measurement.reference_unit | json }},
+				"reference_value": {{ variant.unit_price_measurement.reference_value | json }}
+            }
+        {%- else -%}
+            null
+        {%- endif -%}
+    {%- endcapture -%}
+
+	{
+		"available": {{- variant.available | json -}},
+		"barcode": "{{- variant.barcode -}}",
+		"compare_at_price": {{- variant.compare_at_price | json -}},
+		"image": {%- render 'object-image-json' with image: variant.image -%},
+		"featured_media": {{- variant.featured_media | json -}},
+		"id": {{- variant.id | json -}},
+		"url": {{- variant.url | json -}},
+		"inventory_management": {{- variant.inventory_management | json -}},
+		"inventory_policy": {{- variant.inventory_policy | json -}},
+		"inventory_quantity": {{- variant.inventory_quantity | json -}},
+		"next_incoming_date": {{- variant.next_incoming_date | json -}},
+		"requires_shipping": {{- variant.requires_shipping | json -}},
+		"name": {{- variant.name | json -}},
+		"option1": {{- variant.option1 | json -}},
+		"option2": {{- variant.option2 | json -}},
+		"option3": {{- variant.option3 | json -}},
+		"options": {{- variant.options | json -}},
+		"price": {{- variant.price | json -}},
+		"public_title": {{- variant.public_title | json -}},
+		"requires_shipping": {{- variant.requires_shipping | json -}},
+		"sku": {{- variant.sku | json -}},
+		"taxable": {{- variant.taxable | json -}},
+		"title": {{- variant.title | json -}},
+		"weight": {{- variant.weight | json -}},
+		"weight_unit": {{- variant.weight_unit | json -}},
+		"unit_price": {{- variant.unit_price | json -}},
+		"unit_price_measurement": {{ unit_price_measurement }},
+		"weight_in_unit": {{- variant.weight_in_unit | json -}},
+		"selling_plan_allocations": [
+			{%- for selling_plan_allocation in variant.selling_plan_allocations -%}
+				{{- selling_plan_allocation.selling_plan | json -}}{%- unless forloop.last -%}, {% endunless -%}
+			{%- endfor -%}
+		],
+		"discount_value": {{ discount_value | json -}}			
+	}
+{%- else -%}null{%- endif -%}

@@ -1,0 +1,42 @@
+.counter {
+    display: flex;
+    align-items: center;
+    border: 1px solid $placeholder-outline;
+    max-width: max-content;
+
+    .counter__button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 52px;
+        padding: 10px;
+        transition-property: background-color, color;
+        transition-duration: 0.3s;
+        transition-timing-function: ease;
+
+        @include hover {
+            background-color: $black;
+            color: $primary-background-color;
+        }
+
+        &.disabled {
+            pointer-events: none;
+        }
+    }
+
+    .counter__input {
+        max-width: 60px;
+        appearance: none;
+        border: none;
+        text-align: center;
+        outline: none;
+        -moz-appearance: textfield;
+        background: none;
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+        }
+    }
+}

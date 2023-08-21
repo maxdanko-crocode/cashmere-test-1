@@ -1,0 +1,31 @@
+{%- comment -%}
+    @params
+
+    color_value               - { string } *required
+    color_swatches_config     - { array } *required
+{%- endcomment -%}
+
+{%- assign color_value_handlized = color_value | handleize | strip -%}
+{%- assign color_swatch_background = "--color-swatch-background: " | append: color_value_handlized -%}
+
+{%- for color_swatch_item in color_swatches_config  -%}
+    {%- liquid 
+        assign color_swatch_array = color_swatch_item | split: ':'
+        assign color_name = color_swatch_array | first | handleize | strip
+    
+        if color_value_handlized == color_name
+            assign color_value = color_swatch_array | last | strip 
+
+            if images[color_value] != blank
+                assign color_image = images[color_value] | img_url: "40x40"
+                assign color_swatch_background = "--color-swatch-background: url(" | append: color_image | append: ")"
+            elsif color_value contains "#"
+                assign color_swatch_background = "--color-swatch-background: " | append: color_value
+            endif
+            
+            break
+        endif
+    -%} 
+{%- endfor -%}
+
+{{- color_swatch_background -}}

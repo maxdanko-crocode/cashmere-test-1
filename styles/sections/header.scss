@@ -1,0 +1,123 @@
+@import "../_utils/utils";
+
+.header {
+    .header-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 15px;
+        padding-bottom: 11px;
+        gap: 10px;
+        border-bottom: 1px solid $secondary-background-color;
+    }
+
+    .header-search {
+        &:not(.header-search--mobile) {
+            display: none;
+            
+            @include breakpoint(large) {
+                display: block;
+            }   
+        }   
+    }
+
+    .header-search__form {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .header-search__button {
+        margin-left: 6px;
+    }
+
+    .header-search__button-icon {
+        display: flex;
+    }
+
+    .header-search__field-wrapper {
+
+    }
+
+    .header-logo__link {
+        display: flex;
+        width: 100%;
+        height: auto;
+        max-width: var(--header-logo-width-mobile, 80px);
+
+        @include breakpoint(large) {
+            max-width: var(--header-logo-width-desktop, 100px);
+        }
+    }
+
+    .header-search__field {
+        font-size: 15px;
+        font-weight: 300;
+        line-height: normal;
+        appearance: none;
+        border: none;
+    }
+
+    .header-static {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        @include breakpoint(large) {
+            gap: 20px;
+        }
+    }
+
+    .header-static__item {
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+
+        @include breakpoint(large) {
+            gap: 8px;
+        }
+    }
+
+    .header-static__item-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 20px;
+        max-width: 20px;
+        height: 20px;
+        width: 100%;
+    }
+
+    .header-static__item-text {
+        display: none;
+
+        @include breakpoint(large) {
+            display: block;
+        }
+    }
+
+    .header-bottom {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 1px solid $secondary-background-color;
+    }
+
+    .header-bottom__list {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+        overflow: auto;
+    }
+
+    .header-bottom__list-item {
+        font-size: 15px;
+        display: flex;
+    }
+
+    .header-bottom-list-item__link {
+        text-decoration: none;
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+}

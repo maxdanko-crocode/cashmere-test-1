@@ -1,0 +1,96 @@
+// Styles for Rich text editor content
+.rte {
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+	}
+
+	p {
+		&:not(:last-child) {
+			margin-bottom: 7px;
+		}
+
+		+ p {
+		}
+	}
+
+	a {
+		@include hover {}
+	}
+
+	em {
+	}
+
+	u {
+	}
+
+	blockquote {
+		display: inline-flex;
+		
+		&::before {
+		}
+
+		&::after {
+		}
+	}
+
+	ol,
+	ul {
+		list-style-position: inside;
+		list-style-type: revert;
+		margin-bottom: 20px;
+
+		li {
+			margin-left: 16px;
+			margin-right: 20px;
+			font-size: 14px;
+			font-style: normal;
+			font-weight: 300;
+			line-height: 30px;
+		}
+	}
+
+	ol {
+	}
+
+	ul {
+	}
+
+	.rte__table-wrapper {
+	}
+
+	table {
+
+
+		td {
+
+		}
+
+		th,
+		td {
+
+		}
+
+		th {
+
+
+			&:not(:last-of-type) {
+			}
+
+			h6 {
+
+			}
+		}
+
+		tbody {
+			tr:first-child {
+				td {
+				}
+			}
+		}
+	}
+}
