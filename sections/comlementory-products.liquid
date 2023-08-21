@@ -14,7 +14,7 @@
 <section class="related-products">
   <product-recommendations
           class="container related-products__container"
-          data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ products_to_show }}"
+          data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ products_to_show }}&intent=complementary"
   >
     <div class="related-products__wrapper">
       <div class="related-products__top-row">
@@ -37,13 +37,13 @@
 </section>
 {% schema %}
 {
-  "name": "Recommendations",
+  "name": "Complemantary products",
   "settings": [
     {
       "type": "text",
       "id": "heading",
       "label": "t:sections.related-products.settings.heading.label",
-      "default": "You may also like"
+      "default": "Customers who bought this item also bought"
     },
     {
       "type": "range",

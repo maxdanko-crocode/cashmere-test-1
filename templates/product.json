@@ -10,8 +10,8 @@
       "settings": {
       }
     },
-    "featured": {
-      "type": "featured-products",
+    "comlementory": {
+      "type": "comlementory-products",
       "settings": {
       }
     },
@@ -67,7 +67,7 @@
   "order": [
     "main",
     "related",
-    "featured",
+    "comlementory",
     "instagram",
     "advantages"
   ]

@@ -8,6 +8,30 @@
 {%- capture collapsible_rows -%}{%- endcapture -%}
 
 {%- assign blocks_collapsible = blocks | where: 'type', 'collapsible_row' -%}
+
+{%- capture product_description -%}
+    <div class="main-product__collapse-row">
+        <details class="main-product__collapse-row-opener"
+            id="{{- block.id -}}-dropdown-opener"
+            open
+        >
+            <summary class="main-product-collapse-row-opener__text">
+                <span class="subtitle subtitle--weight-medium text-upper paragraph">
+                    Details
+                </span>
+                <span class="main-product-collapse-row-opener__icon-wrapper"></span>
+            </summary>
+        </details>
+        <div class="main-product-collapse-row__content">
+            <div class="rte">
+                {{- product.description -}}
+            </div>
+        </div>
+    </div>
+{%- endcapture -%}
+
+{%- assign collapsible_rows = collapsible_rows | prepend: product_description -%}
+
 {%- for block in blocks_collapsible -%}
     {%- capture collapsible_row -%}
         {%- assign collapsible_row_title = block.settings.collapsible_row_title -%}
@@ -15,13 +39,13 @@
 
         <div class="main-product__collapse-row" data-dropdown-container>
             <details class="main-product__collapse-row-opener"
-                     id="{{- block.id -}}-dropdown-opener"
-                     data-dropdown-opener
+                id="{{- block.id -}}-dropdown-opener"
+                data-dropdown-opener
             >
                 <summary class="main-product-collapse-row-opener__text">
-                                        <span class="subtitle subtitle--weight-medium">
-                                            {{- collapsible_row_title -}}
-                                        </span>
+                    <span class="subtitle subtitle--weight-medium text-upper paragraph">
+                        {{- collapsible_row_title -}}
+                    </span>
                     <span class="main-product-collapse-row-opener__icon-wrapper"></span>
                 </summary>
             </details>
@@ -38,8 +62,8 @@
 
 <section class="main-product">
     {%- render "product-gallery",
-            product: product,
-            product_form_id: product_form_id
+        product: product,
+        product_form_id: product_form_id
     -%}
 
     <div class="main-product__wrapper">
@@ -65,13 +89,13 @@
                 </div>
 
                 {%- render "product-options",
-                        product: product,
-                        options: product.options_with_values,
-                        current_variant: current_variant,
-                        size_guide: size_guide,
-                        form_id: product_form_id,
-                        change_history_state: true,
-                        section: section
+                    product: product,
+                    options: product.options_with_values,
+                    current_variant: current_variant,
+                    size_guide: size_guide,
+                    form_id: product_form_id,
+                    change_history_state: true,
+                    section: section
                 -%}
 
                 <noscript>
@@ -104,9 +128,9 @@
                     </span>
                     <div class="main-product__counter">
                         {%- render "quantity-selector",
-                                max_value: current_variant_inventory,
-                                form_id: product_form_id,
-                                section: section
+                            max_value: current_variant_inventory,
+                            form_id: product_form_id,
+                            section: section
                         -%}
 
                         {%- assign show_dynamic_buttons = block.settings.show_dynamic_buttons -%}
@@ -130,13 +154,10 @@
                 </div>
             {%- endform -%}
 
-            {%- if collapsible_rows != blank -%}
-                <div class="main-product__collapsible-rows">
-                    {{- collapsible_rows -}}
-                </div>
-            {%- endif -%}
+            <div class="main-product__collapsible-rows">
+                {{- collapsible_rows -}}
+            </div>
         </div>
-
     </div>
 
     {%- if product != blank -%}
@@ -193,18 +214,18 @@
     "blocks": [
         {
             "type": "collapsible_row",
-            "name": "t:sections.main-product.blocks.collapsible_row.name",
+            "name": "Collapsible row",
             "settings": [
                 {
                     "type": "text",
                     "id": "collapsible_row_title",
-                    "label": "t:sections.main-product.blocks.collapsible_row.settings.collapsible_row_title.label",
+                    "label": "Heading",
                     "default": "Collapsible row"
                 },
                 {
                     "type": "richtext",
                     "id": "collapsible_row_content",
-                    "label": "t:sections.main-product.blocks.collapsible_row.settings.collapsible_row_content.label",
+                    "label": "Content",
                     "default": "<p>Share information about your brand.</p>"
                 }
             ]

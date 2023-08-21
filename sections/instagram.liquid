@@ -43,18 +43,18 @@
 
 {% schema %}
 {
-    "name": "t:sections.instagram.name",
+    "name": "Instagram",
     "settings": [
         {
             "type": "text",
             "id": "sub_heading",
-            "label": "t:sections.instagram.settings.sub_heading.label",
+            "label": "Subheading",
             "default": "@thecashmeresale"
         },
         {
             "type": "text",
             "id": "heading",
-            "label": "t:sections.instagram.settings.heading.label",
+            "label": "Heading",
             "default": "Follow us on instagram"
         },
         {
@@ -64,26 +64,25 @@
             "max": 10,
             "step": 1,
             "default": 6,
-            "label": "t:sections.instagram.settings.max_of_columns.label"
+            "label": "Max columns"
         }
     ],
     "blocks": [
         {
             "type": "image",
-            "name": "t:sections.instagram.blocks.image.name",
+            "name": "Image",
             "settings": [
                 {
                     "type": "image_picker",
                     "id": "image",
-                    "label": "t:sections.instagram.blocks.image.settings.image.label",
-                    "info": "t:sections.instagram.blocks.image.settings.image.info"
+                    "label": "Image"
                 }
             ]
         }
     ],
     "presets": [
         {
-            "name":"t:sections.instagram.name"
+            "name":"Instagram"
         }
     ]
 }

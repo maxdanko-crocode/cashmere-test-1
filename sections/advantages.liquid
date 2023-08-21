@@ -37,40 +37,38 @@
 
 {% schema %}
 {
-    "name": "t:sections.advantages.name",
+    "name": "Advantages",
     "blocks": [
         {
             "type": "advantage",
-            "name": "t:sections.instagram.blocks.advantage.name",
+            "name": "Advantage",
             "settings": [
                 {
                     "type": "image_picker",
                     "id": "image",
-                    "label": "t:sections.instagram.blocks.advantage.settings.image.label",
-                    "info": "t:sections.instagram.blocks.advantage.settings.image.info"
+                    "label": "Image"
                 },
                 {
                     "type": "textarea",
                     "id": "image_svg",
-                    "label": "t:sections.instagram.blocks.advantage.settings.image_svg.label",
-                    "info": "t:sections.instagram.blocks.advantage.settings.image_svg.info"
+                    "label": "SVG Icon"
                 },
                 {
                     "type": "text",
                     "id": "title",
-                    "label": ":sections.instagram.blocks.advantage.settings.title.label"
+                    "label": "Heading"
                 },
                 {
                     "type": "textarea",
                     "id": "description",
-                    "label": ":sections.instagram.blocks.advantage.settings.description.label"
+                    "label": "Content"
                 }
             ]
         }
     ],
     "presets": [
         {
-            "name":"t:sections.advantages.name"
+            "name":"Advantages"
         }
     ]
 }
