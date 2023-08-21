@@ -31,8 +31,10 @@
 
       {%- if link_label != blank -%}
         <div class="related-products__footer">
-          <a href="{{- url -}}" class="related-products__button">
-            {{- link_label -}}
+          <a href="{{- url -}}" class="related-products__button button">
+            <span class="related-products__button-text paragraph weight weight--regular">
+              {{- link_label -}}
+            </span>
           </a>
         </div>
       {%- endif -%}

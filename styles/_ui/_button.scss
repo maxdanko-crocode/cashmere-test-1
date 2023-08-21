@@ -31,6 +31,15 @@ button,
     position: relative;
     padding: 0;
 
+    &::before {
+        transition-duration: 0.3s;
+        transition-property: background-color color opacity border;
+        transition-timing-function: ease;
+        -webkit-transition: background-color color opacity border 0.3s ease;
+        -moz-transition: background-color color opacity border 0.3s ease;
+        -o-transition: background-color color opacity border 0.3s ease;
+    }
+
     .spinner {
         position: absolute;
         top: 50%;

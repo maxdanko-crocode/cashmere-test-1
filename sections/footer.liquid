@@ -1,3 +1,116 @@
-<footer class="footer">
-  
+{{- "footer.css" | asset_url | stylesheet_tag -}}
+
+{%- assign blocks = section.blocks -%}
+{%- assign link_list = section.settings.link_list -%}
+
+<footer class="footer container">
+    {%- if blocks != blank -%}
+        <div class="footer-top">
+            <p class="paragraph text-upper weight weight--regular">
+                Locations
+            </p>
+            <ul class="footer-top__list">
+                {%- for block in blocks -%}
+                    {%- assign location_text = block.settings.location_text -%}
+
+                    <li class="footer-top__item paragraph weight weight--light">
+                        {{- location_text -}}
+                    </li>
+                {%- endfor -%} 
+            </ul>
+        </div>
+    {%- endif -%}
+    
+    <div class="footer-center">
+        {%- if link_list.links != blank -%}
+            <ul class="footer-center__list">
+                {%- for link in link_list.links -%}
+                    <li class="footer-center__item">
+                        <a href="{{- link.url -}}" class="paragrapth text-upper weight weight--regular">
+                            {{- link.title -}}
+                        </a>
+                        {%- if link.links != blank -%}
+                            <ul class="footer-center__item-list">
+                                {%- for childlink in link.links -%}
+                                    <li>
+                                        <a class="paragraph weight weight--light" href="{{- childlink.url -}}">
+                                            {{- childlink.title -}}
+                                        </a> 
+                                    </li>
+                                {%- endfor -%}
+                            </ul>
+                        {%- endif -%}
+                    </li>
+                {%- endfor -%}
+            </ul>
+        {%- endif -%}
+        
+        <div class="footer-newsletter">
+            <div class="footer-newsletter__header">
+                <p class="paragraph text-upper weight weight--regular">
+                    JOIN the cashmere sale
+                </p>
+                <p class="paragraph weight weight--light">
+                    Subscribe  to receive updates and find out where we are popping up soon!
+                </p>
+            </div>
+           
+            {% form 'customer', id: section.id, class: "footer-newsletter__form" %}
+                {%- if form.posted_successfully? -%}
+                    <p class="paragraph">
+                        Your subscription to our newsletter has been successful!
+                    </p>
+                {%- else -%}
+                    {%- if form.errors != blank -%}
+                        <div class="rte">{{- form.errors | default_errors -}}</div>
+                    {%- endif -%}
+
+                    <label class="footer-newsletter__label">
+                        <input type="email" 
+                            class="footer-newsletter__input" 
+                            placeholder="{{- "general.fields.email.placeholder" | t -}}" 
+                            aria-label="{{- "general.fields.email.aria_label" | t -}}"
+                            name="contact[email]"
+                            required
+                        >
+                    </label>
+                    
+                    <button class="footer-newsletter__button button" type="submit" aria-label="{{- "general.buttons.subscribe" | t -}}">
+                        SUBSCRIBE
+                    </button>
+                {%- endif -%}
+            {%- endform -%}
+        </div>
+    </div>
+    <div class="footer-bottom">
+
+    </div>
 </footer>
+
+{% schema %}
+    {
+        "name": "Footer",
+        "settings": [
+            {
+                "type": "link_list",
+                "id": "link_list",
+                "label": "Menu",
+                "default": "footer"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "location",
+                "name": "Location",
+                "settings": [
+                    {
+                        "type": "richtext",
+                        "id": "location_text",
+                        "label": "Text",
+                        "default": "<p>Location name</p>"
+                    }
+                ]
+            }
+        ]
+    }
+{% endschema %}

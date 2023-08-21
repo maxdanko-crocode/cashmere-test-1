@@ -37,10 +37,56 @@
     },
     "instagram": {
       "type": "instagram",
+      "blocks": {
+        "89338b1f-9629-4573-8309-6481db7fe400": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/inst1.png"
+          }
+        },
+        "8b098f88-c3f2-4a48-b724-e9b3d3a93a5b": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/inst2.png"
+          }
+        },
+        "d047fde0-b4b7-4334-8ae0-766a6c8f2e5b": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/inst3.png"
+          }
+        },
+        "8e58353c-88b2-4660-a63d-340e4b096293": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/inst4.png"
+          }
+        },
+        "6cc3e003-5bc3-417e-93c3-efc5bc8fe0ee": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/inst5.png"
+          }
+        },
+        "37e9d7ac-e161-476c-9116-d0de3dcc6846": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/inst6.png"
+          }
+        }
+      },
+      "block_order": [
+        "89338b1f-9629-4573-8309-6481db7fe400",
+        "8b098f88-c3f2-4a48-b724-e9b3d3a93a5b",
+        "d047fde0-b4b7-4334-8ae0-766a6c8f2e5b",
+        "8e58353c-88b2-4660-a63d-340e4b096293",
+        "6cc3e003-5bc3-417e-93c3-efc5bc8fe0ee",
+        "37e9d7ac-e161-476c-9116-d0de3dcc6846"
+      ],
       "settings": {
-        "sub_heading": "@thecashmeresale",
         "heading": "Follow us on instagram",
-        "max_of_columns": 6
+        "sub_heading": "@thecashmeresale",
+        "sub_heading_link": ""
       }
     },
     "advantages": {

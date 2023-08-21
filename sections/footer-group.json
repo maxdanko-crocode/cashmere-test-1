@@ -4,7 +4,55 @@
   "sections": {
     "footer": {
       "type": "footer",
-      "settings": {}
+      "blocks": {
+        "91338bd3-2e59-44ca-9175-796c6fcf9b4d": {
+          "type": "location",
+          "settings": {
+            "location_text": "<p>Bergen, NJ<br\/>Boston, MA<br\/>Burlingame, CA<\/p>"
+          }
+        },
+        "0cffe3e7-914c-41e5-b690-43b9c80b042a": {
+          "type": "location",
+          "settings": {
+            "location_text": "<p>Charleston, SC<br\/>Dallas, TX<br\/>Darien, CT<br\/><\/p>"
+          }
+        },
+        "31202356-a50b-4f80-9f0c-34a6e8bf86e6": {
+          "type": "location",
+          "settings": {
+            "location_text": "<p>Denver, CO<br\/>East Bay, CA<br\/>Greenwich, CT<br\/><\/p>"
+          }
+        },
+        "27f1dd7c-532f-4be9-9e10-869540078993": {
+          "type": "location",
+          "settings": {
+            "location_text": "<p>Highland Park, IL<br\/>Marin, CA<br\/>Manhattan, NY<br\/><\/p>"
+          }
+        },
+        "ff098b3e-d15a-4520-9f9b-ed8c20f2ace4": {
+          "type": "location",
+          "settings": {
+            "location_text": "<p>Santa Monica, CA<br\/>St Louis, MO<br\/>Summit, NJ<br\/><\/p>"
+          }
+        },
+        "070c93a8-ff30-424b-92cf-4411feb431d0": {
+          "type": "location",
+          "settings": {
+            "location_text": "<p>Upper East Side<br\/>Upper West Side<br\/>Westport, CT<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "91338bd3-2e59-44ca-9175-796c6fcf9b4d",
+        "0cffe3e7-914c-41e5-b690-43b9c80b042a",
+        "31202356-a50b-4f80-9f0c-34a6e8bf86e6",
+        "27f1dd7c-532f-4be9-9e10-869540078993",
+        "ff098b3e-d15a-4520-9f9b-ed8c20f2ace4",
+        "070c93a8-ff30-424b-92cf-4411feb431d0"
+      ],
+      "settings": {
+        "link_list": "footer"
+      }
     }
   },
   "order": [
