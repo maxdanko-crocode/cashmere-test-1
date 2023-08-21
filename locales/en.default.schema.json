@@ -43,6 +43,15 @@
         }
       }
     },
+    "favicon": {
+      "name": "Favicon",
+      "settings": {
+        "favicon": {
+          "label": "Favicon image",
+          "info": "Will be scaled down to 32 x 32px"
+        }
+      }
+    },
     "cards": {
       "name": "Product cards",
       "settings": {
@@ -366,6 +375,17 @@
         },
         "spacing_grid_vertical": {
           "label": "Vertical space"
+        }
+      }
+    },
+    "product-card": {
+      "color_swatches_config": {
+        "name": "Color swatches",
+        "settings": {
+          "color_swatches_config": {
+            "label": "Color swatches config",
+            "info": "To setup custom colors need use construction <color>:<color filename> uploaded in store files every from new line. Example: Custom color:custom-color.jpg"
+          }
         }
       }
     }

@@ -675,8 +675,11 @@ button:focus-visible,
   cursor: pointer;
   font-style: normal;
   transition-duration: 0.3s;
-  transition-property: background-color, color, opacity;
+  transition-property: background-color color opacity border;
   transition-timing-function: ease;
+  -webkit-transition: background-color color opacity border 0.3s ease;
+  -moz-transition: background-color color opacity border 0.3s ease;
+  -o-transition: background-color color opacity border 0.3s ease;
   box-shadow: unset;
   position: relative;
   padding: 0;

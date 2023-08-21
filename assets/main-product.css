@@ -239,6 +239,13 @@
   color: currentColor;
   background-color: #000000;
 }
+@media (-moz-touch-enabled: 0), (hover: hover) {
+  .main-product .main-product-buy-buttons__button:hover {
+    background-color: #FFFFFF;
+    color: #000000;
+    border-color: #000000;
+  }
+}
 .main-product .main-product__collapsible-rows {
   margin-top: 30px;
 }

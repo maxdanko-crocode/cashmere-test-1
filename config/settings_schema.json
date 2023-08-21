@@ -33,15 +33,10 @@
     "name": "Product card",
     "settings": [
       {
-        "type": "checkbox",
-        "id": "show_product_vendor",
-        "label": "t:settings_schema.product-card.settings.show_vendor.label",
-        "default": true
-      },
-      {
         "type": "textarea",
         "id": "color_swatches_config",
-        "label": "t:settings_schema.product-card.settings.color_swatches_config.label"
+        "label": "t:settings_schema.product-card.color_swatches_config.settings.color_swatches_config.label",
+        "info": "t:settings_schema.product-card.color_swatches_config.settings.color_swatches_config.info"
       }
     ]
   },
