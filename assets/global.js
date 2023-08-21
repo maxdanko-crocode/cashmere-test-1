@@ -853,7 +853,7 @@ if (!window.customElements.get("product-options")) {
     window.customElements.define("product-options", ProductOptions)
 }
 
-class productPrice extends HTMLElement {
+class ProductPrice extends HTMLElement {
     constructor() {
         super();
 
@@ -912,5 +912,34 @@ class productPrice extends HTMLElement {
 }
 
 if (!window.customElements.get("product-price")) {
-    window.customElements.define("product-price", productPrice)
+    window.customElements.define("product-price", ProductPrice)
+}
+
+class ProductDropdowns extends HTMLElement {
+    constructor() {
+        super();
+    }
+
+    connectedCallback() {
+        this.dropdowns = this.querySelectorAll("[data-dropdown-opener]");
+
+        this.addEventListener("click", (event) => {
+            if (event.target.closest("[data-dropdown-opener]")) {
+                const details = event.target.closest("[data-dropdown-opener]");
+                this.setActive(details);
+            }
+        })
+    }
+
+    setActive(current) {
+        this.dropdowns.forEach(dropdown => {
+            if (dropdown !== current) {
+                dropdown.open = false;
+            }
+        })
+    }
+}
+
+if (!window.customElements.get("product-dropdowns")) {
+    window.customElements.define("product-dropdowns", ProductDropdowns)
 }

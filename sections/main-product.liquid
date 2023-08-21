@@ -13,6 +13,7 @@
     <div class="main-product__collapse-row">
         <details class="main-product__collapse-row-opener"
             id="{{- block.id -}}-dropdown-opener"
+            data-dropdown-opener
             open
         >
             <summary class="main-product-collapse-row-opener__text">
@@ -37,7 +38,7 @@
         {%- assign collapsible_row_title = block.settings.collapsible_row_title -%}
         {%- assign collapsible_row_content = block.settings.collapsible_row_content -%}
 
-        <div class="main-product__collapse-row" data-dropdown-container>
+        <div class="main-product__collapse-row">
             <details class="main-product__collapse-row-opener"
                 id="{{- block.id -}}-dropdown-opener"
                 data-dropdown-opener
@@ -154,9 +155,9 @@
                 </div>
             {%- endform -%}
 
-            <div class="main-product__collapsible-rows">
+            <product-dropdowns class="main-product__collapsible-rows">
                 {{- collapsible_rows -}}
-            </div>
+            </product-dropdowns>
         </div>
     </div>
 
