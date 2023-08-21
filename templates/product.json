@@ -2,22 +2,41 @@
   "sections": {
     "main": {
       "type": "main-product",
+      "blocks": {
+        "c1be6d8d-d31e-4e6f-8dce-8f1869a80ec8": {
+          "type": "collapsible_row",
+          "settings": {
+            "collapsible_row_title": "CARE INSTRUCTIONS",
+            "collapsible_row_content": "<p>Share information about your brand.Share information about your brand.Share information about your brand.Share information about your brand.Share information about your brand.Share information about your brand.Share information about your brand.Share information about your brand.Share information about your brand.Share information about your brand.Share information about your brand.Share information about your brand.Share information about your brand.Share information about your brand.Share information about your brand.Share information about your brand.Share information about your brand.Share information about your brand.Share information about your brand.Share information about your brand.Share information about your brand.Share information about your brand.Share information about your brand.Share information about your brand.Share information about your brand.Share information about your brand.Share information about your brand.Share information about your brand.Share information about your brand.Share information about your brand.Share information about your brand.Share information about your brand.Share information about your brand.Share information about your brand.Share information about your brand.Share information about your brand.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "c1be6d8d-d31e-4e6f-8dce-8f1869a80ec8"
+      ],
       "settings": {
       }
     },
     "related": {
       "type": "related-products",
       "settings": {
+        "heading": "You may also like",
+        "products_to_show": 5
       }
     },
     "comlementory": {
       "type": "comlementory-products",
       "settings": {
+        "heading": "Customers who bought this item also bought",
+        "products_to_show": 5
       }
     },
     "instagram": {
       "type": "instagram",
       "settings": {
+        "sub_heading": "@thecashmeresale",
+        "heading": "Follow us on instagram",
+        "max_of_columns": 6
       }
     },
     "advantages": {
@@ -61,7 +80,9 @@
         "block-2",
         "block-3",
         "block-4"
-      ]
+      ],
+      "settings": {
+      }
     }
   },
   "order": [
