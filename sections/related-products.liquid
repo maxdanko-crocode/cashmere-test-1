@@ -3,6 +3,8 @@
 {%- liquid
   assign heading                  = section.settings.heading
   assign products_to_show         = section.settings.products_to_show
+  assign link_label               = section.settings.link_label
+  assign url                      = product.metafields.recommendations.link_for_recommendations | default: section.settings.url
 -%}
 
 {%- capture products_list -%}
@@ -27,11 +29,14 @@
         {{- products_list -}}
       </div>
 
-      <div class="related-products__footer">
-        <a href="#" class="related-products__button">
-          SHOP ALL
-        </a>
-      </div>
+      {%- if link_label != blank -%}
+        <div class="related-products__footer">
+          <a href="{{- url -}}" class="related-products__button">
+            {{- link_label -}}
+          </a>
+        </div>
+      {%- endif -%}
+
     </div>
   </product-recommendations>
 </section>
@@ -53,6 +58,21 @@
       "step": 1,
       "default": 5,
       "label": "t:sections.related-products.settings.products_to_show.label"
+    },
+    {
+      "type": "header",
+      "content": "Shop all button"
+    },
+    {
+      "type": "url",
+      "id": "url",
+      "label": "Link"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Label",
+      "default": "SHOP ALL"
     }
   ],
   "presets": [

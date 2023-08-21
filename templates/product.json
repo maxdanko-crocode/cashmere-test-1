@@ -21,14 +21,18 @@
       "type": "related-products",
       "settings": {
         "heading": "You may also like",
-        "products_to_show": 5
+        "products_to_show": 5,
+        "url": "shopify:\/\/pages\/contact",
+        "link_label": "SHOP ALL"
       }
     },
     "comlementory": {
       "type": "comlementory-products",
       "settings": {
         "heading": "Customers who bought this item also bought",
-        "products_to_show": 5
+        "products_to_show": 5,
+        "url": "",
+        "link_label": "SHOP ALL"
       }
     },
     "instagram": {
