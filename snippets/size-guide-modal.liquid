@@ -18,9 +18,43 @@
                 {% render "icon-cross" %}
             </button>
         </div>
-        <div class="size-guide__wrapper">
-            {{- size_guide_page.content -}}
-        </div>
+        <size-guide-converter class="size-guide__wrapper">
+            <div class="size-guide__selector">
+                <h4>
+                    Select your country
+                </h4>
+
+                <div class="size-guide__selector-body">
+                    <select class="size-guide__selector-dropdown">
+                        {{- all_country_option_tags -}}
+                    </select>
+                    <div class="size-guide__selector-checkboxes">
+                        <div class="size-guide__selector-group">
+                            <input class="size-guide__selector-radio" id="size-guide-radio--1" name="size-guide-input" type="radio" data-size="cm" checked>
+                            <label class="size-guide__selector-label" for="size-guide-radio--1">
+                                <span class="size-guide__selector-checkbox"></span>
+                                <span class="size-guide__selector-text">cm</span>
+                            </label>
+                        </div>
+                        <div class="size-guide__selector-group">
+                            <input class="size-guide__selector-radio" id="size-guide-radio--2" name="size-guide-input" data-size="inc" type="radio">
+                            <label class="size-guide__selector-label" for="size-guide-radio--2">
+                                <span class="size-guide__selector-checkbox"></span>
+                                <span class="size-guide__selector-text">Inches</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="size-guide__wrapper-content" data-size-guide-content>
+                {{- size_guide_page.content -}}
+            </div>
+
+            <picture>
+                <img class="size-guide__image" src="{{- size_guide_image | img_url: '600x' -}}" alt="{{- size_guide_image.alt -}}">
+            </picture>
+        </size-guide-converter>
     </div>
     <div class="size-guide__backdrop" data-modal-backdrop></div>
 </modal-container>

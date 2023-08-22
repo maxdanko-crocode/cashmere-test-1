@@ -943,3 +943,63 @@ class ProductDropdowns extends HTMLElement {
 if (!window.customElements.get("product-dropdowns")) {
     window.customElements.define("product-dropdowns", ProductDropdowns)
 }
+
+class SizeGuideConverter extends HTMLElement {
+    constructor() {
+        super();
+    }
+
+    connectedCallback() {
+        this.content = this.querySelector("[data-size-guide-content]");
+
+        this.addEventListener("change", (event) => {
+            if (event.target.closest("[data-size]")) {
+                const target = event.target.closest("[data-size]");
+                const type = target.getAttribute("data-size");
+
+                this.convertTo(type);
+            }
+        })
+    }
+
+    convertTo(type) {
+        const trs = this.content.querySelectorAll("tr");
+        console.log(window.translations.product.sizeGuide.inc);
+        console.log(window.translations.product.sizeGuide.cm);
+
+        trs.forEach(tr => {
+            if (tr !== trs[0]) {
+                const tds = tr.querySelectorAll("td");
+                
+                tds.forEach(td => {
+                    if (td !== tds[0]) {
+                        const innerText = td.innerHTML.split(" ");
+                        const sizeValue = innerText[0];
+                        const doubleValue = sizeValue.split("-");
+                        doubleValue.forEach(value => {
+                            const inc = this.getInc(+value);
+                            console.log(inc);
+                        })
+                    }
+                })
+            }
+        });
+
+        if (type === "inc") {
+            
+        } else {
+
+        }
+    }
+
+    getInc(value) {
+        if (typeof value === "number") {
+            return Math.round((value * 0.39) * 100) / 100;
+        }
+    }
+}
+
+
+if (!window.customElements.get("size-guide-converter")) {
+    window.customElements.define("size-guide-converter", SizeGuideConverter)
+}

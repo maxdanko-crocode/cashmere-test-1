@@ -43,6 +43,28 @@
     }
 }
 
+@keyframes animation-move-left {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  1% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  99% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
 @keyframes animation-move-top-centered {
     from {
       transform: translate(-50%, 0);
@@ -93,10 +115,10 @@
     }
   
     99% {
-      opacity: 0.5;
+      opacity: 0.4;
     }
   
     to {
-      opacity: 0.5;
+      opacity: 0.4;
     }
 }

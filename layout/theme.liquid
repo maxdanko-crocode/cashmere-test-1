@@ -164,6 +164,10 @@
             add_to_cart: "{{ 'sections.product.buttons.add_to_cart' | t }}",
             sold_out: "{{ 'sections.product.buttons.sold_out' | t }}",
             unavailable: "{{ 'sections.product.buttons.unavailable' | t }}"
+          },
+          sizeGuide: {
+            inc: "{{ 'sections.product.size-guide.inc' | t: value: '[value]' }}",
+            cm: "{{ 'sections.product.size-guide.cm' | t: value: '[value]' }}"
           }
         }
       };

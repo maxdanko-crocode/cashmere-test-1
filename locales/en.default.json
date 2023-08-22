@@ -271,6 +271,10 @@
       "no-products": "No products found"
     },
     "product": {
+      "size-guide": {
+        "inc": "{{ value }} inc",
+        "cm": "{{ value }} cm"
+      },
       "description": "Description",
       "color_option": "Color option {{ option }}",
       "size_option": "Size option {{ option }}",

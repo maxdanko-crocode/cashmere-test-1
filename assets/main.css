@@ -505,6 +505,24 @@ a:focus-visible {
     opacity: 1;
   }
 }
+@keyframes animation-move-left {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  1% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  99% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
 @keyframes animation-move-top-centered {
   from {
     transform: translate(-50%, 0);
@@ -545,10 +563,10 @@ a:focus-visible {
     opacity: 0;
   }
   99% {
-    opacity: 0.5;
+    opacity: 0.4;
   }
   to {
-    opacity: 0.5;
+    opacity: 0.4;
   }
 }
 * {
@@ -1019,15 +1037,33 @@ button:focus-visible,
 .size-guide:not(.show) {
   display: none;
 }
+.size-guide.show .size-guide__modal {
+  animation: animation-move-left 0.3s ease;
+}
+.size-guide.show .size-guide__backdrop {
+  animation: animation-opacity-backdrop 0.3s ease;
+}
 .size-guide .size-guide__heading {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
+  padding: 26px 32px 24px;
 }
 .size-guide .size-guide__heading .paragraph {
   line-height: normal;
   letter-spacing: 1.4px;
+}
+.size-guide .size-guide__heading::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #000000;
+  opacity: 0.1;
 }
 .size-guide .size-guide__modal {
   position: fixed;
@@ -1038,7 +1074,6 @@ button:focus-visible,
   max-width: 556px;
   z-index: 1001;
   height: 100vh;
-  padding: 32px 26px;
 }
 .size-guide .size-guide__backdrop {
   position: fixed;
@@ -1066,8 +1101,109 @@ button:focus-visible,
 }
 .size-guide .size-guide__wrapper {
   overflow: auto;
+  height: calc(100% - 68px);
 }
-
+.size-guide .size-guide__wrapper-content {
+  margin-top: 16px;
+  padding: 20px 32px;
+}
+.size-guide .size-guide__wrapper-content table {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.56px;
+}
+.size-guide .size-guide__wrapper-content tr {
+  border: 1px solid #F6F5F3;
+}
+.size-guide .size-guide__wrapper-content tr:first-child {
+  background-color: #F6F5F3;
+}
+.size-guide .size-guide__wrapper-content td {
+  padding: 16px;
+}
+.size-guide .size-guide__image {
+  width: 100%;
+}
+.size-guide .size-guide__selector {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-left: 32px;
+  padding-right: 32px;
+  margin-top: 20px;
+}
+.size-guide .size-guide__selector-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.size-guide .size-guide__selector-dropdown {
+  position: relative;
+  width: 100%;
+  max-width: 245px;
+  display: flex;
+  padding: 16px;
+  border: 1px solid #F6F5F3;
+}
+.size-guide .size-guide__selector-checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+.size-guide .size-guide__selector-group {
+  display: flex;
+}
+.size-guide .size-guide__selector-radio {
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  border: none;
+  outline: none;
+}
+.size-guide .size-guide__selector-radio:not(:checked) ~ .size-guide__selector-label .size-guide__selector-checkbox::after {
+  background-color: transparent;
+}
+.size-guide .size-guide__selector-label {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+@media (-moz-touch-enabled: 0), (hover: hover) {
+  .size-guide .size-guide__selector-label:hover {
+    cursor: pointer;
+  }
+}
+.size-guide .size-guide__selector-checkbox {
+  position: relative;
+  display: flex;
+  min-width: 24px;
+  max-width: 24px;
+  height: 24px;
+  width: 100%;
+}
+.size-guide .size-guide__selector-checkbox:before {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #000000;
+}
+.size-guide .size-guide__selector-checkbox:after {
+  width: 12px;
+  height: 12px;
+  background-color: #000000;
+}
+.size-guide .size-guide__selector-checkbox:before, .size-guide .size-guide__selector-checkbox:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
 .custom {
   text-align: center;
 }

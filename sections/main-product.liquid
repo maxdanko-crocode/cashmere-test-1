@@ -1,8 +1,9 @@
 {{- "main-product.css" | asset_url | stylesheet_tag -}}
 
-{%- assign current_variant = product.selected_or_first_available_variant -%}
-{%- assign size_guide = section.settings.size_guide -%}
-{%- assign blocks = section.blocks -%}
+{%- assign current_variant  = product.selected_or_first_available_variant -%}
+{%- assign size_guide       = section.settings.size_guide -%}
+{%- assign size_guide_image = section.settings.size_guide_image -%}
+{%- assign blocks           = section.blocks -%}
 
 {%- capture product_form_id -%}product-form-{{ product.id }}-{{ section.id }}{%- endcapture -%}
 {%- capture collapsible_rows -%}{%- endcapture -%}
@@ -162,7 +163,7 @@
     </div>
 
     {%- if size_guide != blank -%}
-        {%- render "size-guide-modal", size_guide_page: size_guide -%}
+        {%- render "size-guide-modal", size_guide_page: size_guide, size_guide_image: size_guide_image -%}
     {%- endif -%}
 
     {%- if product != blank -%}
@@ -220,6 +221,11 @@
             "type": "page",
             "id": "size_guide",
             "label": "Size guide"
+        },
+        {
+            "type": "image_picker",
+            "id": "size_guide_image",
+            "label": "Image for size guide modal"
         }
     ],
     "blocks": [
