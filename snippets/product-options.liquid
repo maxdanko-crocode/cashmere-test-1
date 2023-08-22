@@ -28,26 +28,24 @@
             {%- endif -%}
 
             <div class="main-product__option">
-                
-                {%- if size_label contains option_downcased and size_guide != blank -%}
-                    <button-open-modal>
-                        <button class="main-product__option-title main-product__option-title--button" type="button" data-modal-open-button="modal-size-guide--{{- section.id -}}">
-                            <span class="main-product-option-title__icon-wrapper">
-                                {% render 'icon-ruler' %}
-                            </span>
-                            <span>
-                            {{- "sections.product.size_guide.heading" | t -}}
-                            </span>
-                        </button>
-                    </button-open-modal>
-                {%- endif -%}
-
-                <span class="main-product__option-title extra-small text-upper">
-                    <span>
-                        {{- option.name -}}:
+                <div class="main-product__option-header">
+                    <span class="main-product__option-title extra-small text-upper">
+                        <span>
+                            {{- option.name -}}:
+                        </span>
                     </span>
-                </span>
-                <ul class="main-product__option-list">
+    
+                    {%- if size_label contains option_downcased and size_guide != blank -%}
+                        <button-open-modal>
+                            <button class="main-product__option-title main-product__option-title--button" type="button" data-modal-open-button="modal-size-guide--{{- section.id -}}">
+                                <span>
+                                    Size Guide
+                                </span>
+                            </button>
+                        </button-open-modal>
+                    {%- endif -%}
+                </div>
+                <ul class="main-product__option-list {% if color_labels contains option_downcased %} main-product__option-list--color{%- endif -%}">
                     {% for value in option.values %}
                         <li>
                             <input class="main-product__option-radio" 

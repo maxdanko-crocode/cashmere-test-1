@@ -155,9 +155,21 @@
 .main-product .main-product__option-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
   align-items: center;
   margin-top: 15px;
+}
+.main-product .main-product__option-list:not(.main-product__option-list--color) {
+  gap: 19px;
+}
+.main-product .main-product__option-list.main-product__option-list--color {
+  gap: 8px;
+}
+.main-product .main-product__option-title.main-product__option-title--button {
+  background-color: transparent;
+  padding: 0;
+}
+.main-product .main-product__option-title.main-product__option-title--button * {
+  pointer-events: none;
 }
 .main-product .main-product__option-radio {
   position: absolute;
@@ -217,6 +229,11 @@
   background-position: center;
   background-size: cover;
   border-radius: 50%;
+}
+.main-product .main-product__option-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .main-product .main-product__counter--wrapper {
   margin-top: 20px;
