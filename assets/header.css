@@ -92,6 +92,11 @@
   align-items: center;
   gap: 40px;
   overflow: auto;
+  scrollbar-width: 0;
+}
+.header .header-bottom__list::-webkit-scrollbar {
+  width: 0;
+  opacity: 0;
 }
 .header .header-bottom__list-item {
   font-size: 15px;

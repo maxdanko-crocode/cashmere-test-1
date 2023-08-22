@@ -161,6 +161,10 @@
         </div>
     </div>
 
+    {%- if size_guide != blank -%}
+        {%- render "size-guide-modal", size_guide_page: size_guide -%}
+    {%- endif -%}
+
     {%- if product != blank -%}
         {%- assign variants_json = "" -%}
         {%- for variant in product.variants -%}
@@ -211,7 +215,13 @@
 {% schema %}
 {
     "name": "Product information",
-    "settings": [],
+    "settings": [
+        {
+            "type": "page",
+            "id": "size_guide",
+            "label": "Size guide"
+        }
+    ],
     "blocks": [
         {
             "type": "collapsible_row",

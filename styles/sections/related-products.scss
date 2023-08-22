@@ -12,7 +12,8 @@
 
   .related-products__list {
     display: grid;
-    gap: 16px;
+    row-gap: 32px;
+    column-gap: 16px;
 
     @include breakpoint(small) {
       grid-template-columns: repeat(2, 1fr);
@@ -20,12 +21,12 @@
 
     @include breakpoint(large) {
       grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      column-gap: 20px;
     }
 
     @include breakpoint(extra-large) {
       grid-template-columns: repeat(5, 1fr);
-      gap: 32px;
+      column-gap: 32px;
     }
   }
 

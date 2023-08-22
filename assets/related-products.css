@@ -9,7 +9,8 @@
 }
 .related-products .related-products__list {
   display: grid;
-  gap: 16px;
+  row-gap: 32px;
+  column-gap: 16px;
 }
 @media (min-width: 576px) {
   .related-products .related-products__list {
@@ -19,13 +20,13 @@
 @media (min-width: 992px) {
   .related-products .related-products__list {
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    column-gap: 20px;
   }
 }
 @media (min-width: 1200px) {
   .related-products .related-products__list {
     grid-template-columns: repeat(5, 1fr);
-    gap: 32px;
+    column-gap: 32px;
   }
 }
 .related-products .related-products__heading {

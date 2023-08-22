@@ -739,7 +739,7 @@ button:focus-visible,
 .button.button--arrow {
   background-color: #FFFFFF;
   color: #000000;
-  padding: 16px;
+  padding: 10px;
   min-width: 44px;
   max-width: 44px;
   min-height: 44px;

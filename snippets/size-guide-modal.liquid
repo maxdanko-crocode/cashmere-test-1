@@ -1,0 +1,27 @@
+{%- comment -%}
+
+    @params
+
+    size_guide_page - to get table for size guide need paste page and get content from page - {page object} *required
+{%- endcomment -%}
+
+<modal-container class="size-guide" 
+    data-modal-id="modal-size-guide--{{- section.id -}}"
+    data-modal-oveflow
+>
+    <div class="size-guide__modal">
+        <div class="size-guide__heading">
+            <h3 class="h2">
+                {{- "sections.product.size_guide.heading" | t -}}
+            </h3>
+            <button class="size-guide__close-button" data-modal-close-button>
+                {% render "icon-cross" %}
+            </button>
+        </div>
+        <div class="size-guide__wrapper">
+            {{- size_guide_page.content -}}
+        </div>
+    </div>
+    <div class="size-guide__backdrop" data-modal-backdrop></div>
+</modal-container>
+
