@@ -2,22 +2,29 @@
 {%- assign color_labels = 'color,colour,couleur,cor,colore,farbe,색,色,カラー,färg,farve,szín,barva' | split: ',' -%}
 
 {%- if template.name != "cart" -%}
+    {{- "cart-drawer.css" | asset_url | stylesheet_tag -}}
+
     <section class="cart-drawer">
         <modal-container
-            data-modal-id="cart-drawer--{{- section.id -}}"
+            data-modal-id="cart-drawer--modal"
             data-modal-oveflow
+            class="cart-drawer-wrapper"
         >
-            {%- form 'cart', cart, class: "cart-drawer__modal" -%}
+            {%- form 'cart', cart, class: "cart-drawer__modal", data-cart-drawer-form: true -%}
                 <div class="cart-drawer__heading">
                     <div class="cart-drawer__heading-text">
-                        <div>
+                        <div class="cart-drawer__heading-icon-wrapper">
                             {% render 'icon-cart' %}
                         </div>
-                        <div>
+                        <div class="cart-drawer__title paragraph text-upper weight weight--regular">
                             <span>My bag</span>
-                            <span>.</span>
+                            <span class="dot"></span>
                             <span data-cart-count>
-                                
+                                {%- if cart.item_count == 1 -%}
+                                    {{- cart.item_count }} item
+                                {%- else -%}
+                                    {{- cart.item_count }} items
+                                {%- endif -%}
                             </span>
                         </div>
                     </div>
@@ -27,18 +34,19 @@
                 </div>
 
                 {% render 'cart-items', line_items: cart.items, container_class: "cart-drawer__items" %}
-
-                <button class="cart-drawer__button"
-                    name="checkout"
-                    type="submit">
-                        <span>
-                            Checkout
-                        </span>
-                        <span>.</span>
-                        <span data-cart-price>
-                            {% render "price", price_value: cart.total_price %}
-                        </span>
-                </button>
+                <div class="cart-drawer__bottom">
+                    <button class="cart-drawer__button button"
+                        name="checkout"
+                        type="submit">
+                            <span class="text-upper">
+                                Checkout
+                            </span>
+                            <span class="dot"></span>
+                            <span data-cart-price>
+                                {% render "price", price_value: cart.total_price %}
+                            </span>
+                    </button>
+                </div>
             {%- endform -%}
             <div class="cart-drawer__backdrop" data-modal-backdrop></div>
         </modal-container>

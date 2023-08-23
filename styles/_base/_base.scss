@@ -128,3 +128,20 @@ picture {
 .text-upper {
 	text-transform: uppercase;
 }
+
+.dot {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 5px;
+	height: 100%;
+
+	&:before {
+		content: "";
+		width: 5px;
+		height: 5px;
+		background-color: currentColor;
+		border-radius: 50%;
+	}
+}

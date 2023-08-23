@@ -1,0 +1,169 @@
+@import "../_utils/utils";
+
+.cart-drawer {
+    .cart-drawer-wrapper {
+        &:not(.show) {
+            display: none;
+        }
+    
+        &.show {
+            .cart-drawer__modal {
+                animation: animation-move-left 0.3s ease;
+            }
+    
+            .cart-drawer__backdrop {
+                animation: animation-opacity-backdrop 0.3s ease;
+            }
+        }
+    }
+
+    .cart-drawer__modal {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        right: 0;
+        top: 0;
+        width: 100%;
+        background-color: $primary-background-color;
+        max-width: 556px;
+        z-index: calc($z-index-modal + 1);
+        height: 100vh;
+        padding: 0 32px;
+
+        &:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-color: $primary-background-color;
+            transition-duration: 0.3s;
+            transition-property: opacity border;
+            transition-timing-function: ease;
+            -webkit-transition: opacity border 0.3s ease;
+            -moz-transition: opacity border 0.3s ease;
+            -o-transition: opacity border 0.3s ease;
+            opacity: 0;
+        }
+
+        &.opacity {
+            &:before {
+                opacity: 0.5;
+                z-index: 3;
+
+                @include hover {
+                    cursor: none;
+                }
+            }
+        }
+    }
+
+    .cart-drawer__backdrop {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: calc($z-index-modal-backdrop + 1);
+        background-color: $tertiary-background-color;
+        opacity: 0.4;
+
+        @include hover {
+            cursor: pointer;
+        }
+    }
+
+    .cart-drawer__heading {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 25px 0;
+        background-color: $primary-background-color;
+
+        .paragraph {
+            line-height: normal;
+            letter-spacing: 1.4px;
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: $tertiary-background-color;
+            opacity: 0.1;
+        }
+    }
+
+    .cart-drawer__heading-icon-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .cart-drawer__heading-text {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .cart-drawer__title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .cart-drawer__close-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        background-color: transparent;
+        padding: 0;
+    }
+
+    .cart-drawer__items {
+        display: flex;
+        flex-direction: column;
+        max-height: 420px;
+        overflow: auto;
+    }
+
+    .cart-drawer__bottom {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        flex-grow: 1;
+        padding-bottom: 20px;
+    }
+
+    .cart-drawer__button {
+        width: 100%;
+        padding: 17px;
+        color: $primary-button-text-color;
+        background-color: $primary-button-background;
+        gap: 10px;
+
+        @include hover {
+            background-color: $tertiary-button-background;
+            color: $secondary-button-text-color;
+            border-color: $primary-button-background;
+        }
+    }
+}

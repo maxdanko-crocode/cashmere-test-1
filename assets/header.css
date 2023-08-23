@@ -58,11 +58,16 @@
   text-decoration: none;
   display: flex;
   align-items: center;
+  background-color: transparent;
+  padding: 0;
 }
 @media (min-width: 992px) {
   .header .header-static__item {
     gap: 8px;
   }
+}
+.header .header-static__item * {
+  pointer-events: none;
 }
 .header .header-static__item-icon {
   display: flex;

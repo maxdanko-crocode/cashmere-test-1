@@ -1251,15 +1251,14 @@ class CartItems extends HTMLElement {
                 const countValue = cartSection.querySelector("[data-cart-count]");
 
                 this.updateElementInnerHtml(priceValue.innerHTML, "[data-cart-price]");
-
-                if (+countValue.innerHTML > 0) {
-                    this.updateElementInnerHtml(countValue.innerHTML, "[data-cart-count]", false);
-                } else {
-                    this.updateElementInnerHtml(0, "[data-cart-count]", false);
-                }
+                this.updateElementInnerHtml(countValue.innerHTML, "[data-cart-count]", false);
 
                 this.enableLoading(false);
-                document.dispatchEvent(new CustomEvent("cart-drawer:open"));
+                document.dispatchEvent(new CustomEvent("modals:open", {
+                    detail: {
+                        modalId: "cart-drawer--modal"
+                    }
+                }));
             })
             .catch(e => {
                 console.error(e);
@@ -1296,18 +1295,16 @@ class CartItems extends HTMLElement {
     }
 
     enableLoading(enable) {
-        this.spinnerElement = this.section.querySelector(".js-modal-spinner");
-
-        if (!this.spinnerElement) return;
+        this.form = this.section.querySelector("[data-cart-drawer-form]");
 
         if (enable === true) {
-            if (this.spinnerElement.classList.contains("show")) return;
+            if (this.form.classList.contains("opacity")) return;
 
-            this.spinnerElement.classList.add("show");
+            this.form.classList.add("opacity");
         } else {
-            if (!this.spinnerElement.classList.contains("show")) return;
+            if (!this.form.classList.contains("opacity")) return;
 
-            this.spinnerElement.classList.remove("show");
+            this.form.classList.remove("opacity");
         }
     }
 }

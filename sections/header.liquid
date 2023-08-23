@@ -72,14 +72,32 @@
                     Account
                 </p>
             </a>
-            <a class="header-static__item" href="#">
-                <div class="header-static__item-icon">
-                    {% render 'icon-cart' %}
-                </div>
-                <p class="header-static__item-text">
-                    Cart({{- cart.currency.symbol -}})
-                </p>
-            </a>
+            {%- if template.name != "cart" %}
+                <button-open-modal class="no-js-hidden">
+                    <button data-cart-drawer-button-open data-modal-open-button="cart-drawer--modal" type="button" class="header-static__item" aria-label="{{- "sections.header.cart_link" | t -}}">
+                        <div class="header-static__item-icon">
+                            {% render 'icon-cart' %}
+                        </div>
+                        <p class="header-static__item-text">
+                            Cart({{- cart.currency.symbol -}})
+                        </p>
+                    </button>
+                </button-open-modal>
+                <noscript>
+                    <a href="{{- routes.cart_url -}}" class="header__link header__link--static" aria-label="{{- "sections.header.cart_link" | t -}}">
+                        {%- render "icon-cart" -%}
+                    </a>
+                </noscript>
+            {%- else -%}
+                <a class="header-static__item" href="{{- routes.cart_url -}}" aria-label="{{- "sections.header.cart_link" | t -}}">
+                    <div class="header-static__item-icon">
+                        {% render 'icon-cart' %}
+                    </div>
+                    <p class="header-static__item-text">
+                        Cart({{- cart.currency.symbol -}})
+                    </p>
+                </a>
+            {%- endif -%}
         </div>       
     </div>
     <div class="header-bottom">

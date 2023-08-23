@@ -72,9 +72,15 @@
         text-decoration: none;
         display: flex;
         align-items: center;
+        background-color: transparent;
+        padding: 0;
 
         @include breakpoint(large) {
             gap: 8px;
+        }
+
+        * {
+            pointer-events: none;
         }
     }
 
