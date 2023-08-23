@@ -1,0 +1,33 @@
+{%- comment -%}
+
+    @params
+    max_value - if used for product or need install max value send that value 
+    quantity - line item quantity
+{%- endcomment -%}
+
+<cart-quantity-selector class="counter">
+    <button aria-label="{{- "general.buttons.minus" | t -}}" 
+        class="counter__minus js-minus-button" 
+        type="button"
+    >
+        {% render "icon-minus" %}
+    </button>
+    <label>
+        <cart-quantity-input>
+            <input data-cart-quantity-input 
+                class="counter__number" 
+                type="text" 
+                inputmode="numeric" 
+                value="{{- quantity -}}" 
+                {% if max_value != blank %}max="{{- max_value -}}"{% endif %}
+            />
+        </cart-quantity-input>
+    </label>
+    <button aria-label="{{- "general.buttons.plus" | t -}}" 
+        class="counter__plus js-plus-button{%- if quantity == max_value %} disabled{%- endif -%}" 
+        type="button"
+        {%- if quantity == max_value %} disabled{%- endif -%}
+    >
+        {% render "icon-plus" %}
+    </button>
+</cart-quantity-selector>

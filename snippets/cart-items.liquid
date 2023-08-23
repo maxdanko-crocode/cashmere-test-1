@@ -1,0 +1,104 @@
+{%- comment -%}
+
+    @params
+    line_items - { array } *required
+    container_class - { class }*required
+{%- endcomment -%}
+
+<cart-items class="{{- container_class -}}">
+    {%- if line_items != blank -%}
+        {%- for line_item in line_items -%}
+            {%- liquid
+                assign image                = line_item.image
+                assign title                = line_item.product.title
+                assign options              = line_item.options_with_values
+                assign url                  = line_item.url
+                assign original_price       = line_item.original_price
+                assign original_line_price  = line_item.original_line_price
+                assign final_price          = line_item.final_price
+                assign final_line_price     = line_item.final_line_price
+                assign quantity 		    = line_item.quantity
+                assign current_variant      = line_item.variant
+            -%}
+
+            <div class="cart-item js-cart-item" data-variant-id="{{- line_item.key -}}">
+                <div class="cart-item__image-wrapper">
+                    {%- if image != blank -%}
+                        <picture>
+                            <img src="{{- image | img_url: '150x' -}}" alt="{{- image.alt -}}" class="cart-item__image">
+                        </picture>
+                    {%- else -%}
+                        <div>
+                            {{- "product-1" | placeholder_svg_tag: "cart-item__image placeholder-image" -}}
+                        </div>
+                    {%- endif -%}
+                </div>
+                <div class="cart-item__body">
+                    <div class="cart-item__heading">
+                        <a class="cart-item__title" href="{{- url -}}">
+                            {{- title -}}
+                        </a>
+                        <span>
+                            {%- if original_price != final_price -%}
+                                <span class="">
+                                    {{- final_price | money -}}
+                                </span>
+
+                                <span class="">
+                                    {{- original_price | money -}}
+                                </span>
+                            {%- else -%}
+                                <span class="">
+                                    {{- original_price | money -}}
+                                </span>
+                        {%- endif -%}
+                        </span>
+                    </div>
+
+                    {%- if line_item.product.has_only_default_variant == false -%}
+                        <div class="cart-item__options">
+                            {%- for option in options -%}
+                                <span class="cart-item__option">{{- option.name -}}: <span>{{ option.value -}}</span></span>
+                            {%- endfor -%}
+                        </div>
+                    {%- endif -%}
+
+                    <div class="cart-item__body-bottom">
+                        {%- assign current_variant_inventory = null -%}
+
+                        {%- if current_variant.available -%}
+                            {%- if current_variant.inventory_management and current_variant.inventory_policy == 'deny' -%}
+                                {%- assign current_variant_inventory = current_variant.inventory_quantity -%}
+                            {%- endif -%}
+                        {%- endif -%}
+
+                        {%- render 'cart-quantity-selector', max_value: current_variant_inventory, quantity: line_item.quantity -%}
+
+                        <cart-remove-button class="no-js-hidden">
+                            <a href="{{- line_item.url_to_remove -}}"
+                                data-remove-from-cart-button 
+                                class="js-remove-from-cart-button"
+                            >
+                                Remove
+                            </a>
+                        </cart-remove-button>
+
+                        <noscript>
+                            <a href="{{- line_item.url_to_remove -}}" class="js-remove-from-cart-button">
+                                Remove
+                            </a>
+                        </noscript>
+                    </div>
+                </div>
+            </div>
+        {%- endfor -%}
+    {%- else -%}
+        <div class="empty-cart">
+          <div class="empty-cart__text-content">
+            <p class="empty-cart__title">
+                Your cart is empty
+            </p>
+          </div>
+        </div>
+    {%- endif -%}
+</cart-items>

@@ -1,1 +1,53 @@
-{%- render 'cart-drawer' -%}
+{%- assign color_swatches_config = settings.color_swatches_config | newline_to_br | split: '<br />'-%}
+{%- assign color_labels = 'color,colour,couleur,cor,colore,farbe,색,色,カラー,färg,farve,szín,barva' | split: ',' -%}
+
+{%- if template.name != "cart" -%}
+    <section class="cart-drawer">
+        <modal-container
+            data-modal-id="cart-drawer--{{- section.id -}}"
+            data-modal-oveflow
+        >
+            {%- form 'cart', cart, class: "cart-drawer__modal" -%}
+                <div class="cart-drawer__heading">
+                    <div class="cart-drawer__heading-text">
+                        <div>
+                            {% render 'icon-cart' %}
+                        </div>
+                        <div>
+                            <span>My bag</span>
+                            <span>.</span>
+                            <span data-cart-count>
+                                
+                            </span>
+                        </div>
+                    </div>
+                    <button class="cart-drawer__close-button" type="button" data-modal-close-button>
+                        {% render "icon-cross" %}
+                    </button>
+                </div>
+
+                {% render 'cart-items', line_items: cart.items, container_class: "cart-drawer__items" %}
+
+                <button class="cart-drawer__button"
+                    name="checkout"
+                    type="submit">
+                        <span>
+                            Checkout
+                        </span>
+                        <span>.</span>
+                        <span data-cart-price>
+                            {% render "price", price_value: cart.total_price %}
+                        </span>
+                </button>
+            {%- endform -%}
+            <div class="cart-drawer__backdrop" data-modal-backdrop></div>
+        </modal-container>
+    </section>
+{%- endif -%}
+
+{% schema %}
+    {
+        "name": "Cart drawer",
+        "settings": []
+    }
+{% endschema %}

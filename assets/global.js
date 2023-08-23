@@ -65,6 +65,17 @@ function getUrlWithVariant(url, id) {
     return url.concat('?variant=').concat(id);
 }
 
+function fetchConfig(type = 'json') {
+    return {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': `application/${type}`,
+            'X-Requested-With': 'XMLHttpRequest'
+        }
+    };
+}
+
 class SliderComponent extends HTMLElement {
     constructor() {
         super();
@@ -1057,4 +1068,310 @@ class SizeGuideConverter extends HTMLElement {
 
 if (!window.customElements.get("size-guide-converter")) {
     window.customElements.define("size-guide-converter", SizeGuideConverter)
+}
+
+class CartQuantitySelector extends HTMLElement {
+    constructor() {
+        super();
+
+        this.cartItems = this.closest("cart-items");
+        this.cartItem = this.closest(".js-cart-item");
+    }
+
+    connectedCallback() {
+        this.abortController = new AbortController();
+        this.inputElementContainer = this.querySelector("cart-quantity-input");
+        this.minusButton = this.querySelector(".js-minus-button");
+        this.plusButton = this.querySelector(".js-plus-button");
+
+        this.debouncedOnChange = debounce(() => {
+            this.changeCart();
+        }, 500)
+
+        this.minusButton.addEventListener("click", () => {
+            if (this.inputElementContainer.quantity > 1) {
+                this.inputElementContainer.quantity = this.inputElementContainer.quantity - 1, {
+                    signal: this.abortController.signal
+                }
+    
+                this.debouncedOnChange();
+                this.disableButtonPlus();
+            } else {
+                this.inputElementContainer.quantity = this.inputElementContainer.quantity - 1;
+                this.removeFromCartButton = this.cartItem.querySelector("[data-remove-from-cart-button]");
+
+                if (this.removeFromCartButton) {
+                    this.cartItems.removeFromCart(this.removeFromCartButton.href);
+                }
+            }
+        });
+
+        this.plusButton.addEventListener("click", () => {
+            this.inputElementContainer.quantity = this.inputElementContainer.quantity + 1, {
+                signal: this.abortController.signal
+            }
+
+            this.debouncedOnChange();
+            this.disableButtonPlus();
+        });
+    }
+
+    disableButtonPlus() {
+        if (this.inputElementContainer.quantity >= this.inputElementContainer.maxQuantity) {
+            this.plusButton.classList.add("disabled");
+            this.plusButton.setAttribute("disabled", "disabled");
+        } else {
+            this.plusButton.classList.remove("disabled");
+            this.plusButton.removeAttribute("disabled");
+        }
+    }
+
+    changeCart() {
+        this.variantId = this.cartItem.dataset.variantId;
+        this.cartItems.onCartChange(this.variantId, this.inputElementContainer.quantity);
+    }
+}
+
+if (!window.customElements.get("cart-quantity-selector")) {
+    window.customElements.define("cart-quantity-selector", CartQuantitySelector);
+}
+
+class CartQuantityInput extends HTMLElement {
+    constructor() {
+        super();
+        this.cartItems = this.closest("cart-items");
+        this.cartItem = this.closest(".js-cart-item");
+        this.cartQuantitySelector = this.closest("cart-quantity-selector");
+    }
+
+    connectedCallback() {
+        this.inputElement = this.querySelector("[data-cart-quantity-input]");
+
+        this.inputElement.addEventListener("input", () => {
+            this.onValueInput();
+        });
+
+        this.inputElement.addEventListener("change", () => {
+            this.onValueChanged();
+        });
+    }
+
+    get maxQuantity() {
+        return parseInt(this.inputElement.max);
+    }
+    get quantity() {
+        return parseInt(this.inputElement.value);
+    }
+    set quantity(quantity) {
+        const isNumeric = (typeof quantity === "number" || typeof quantity === "string" && quantity.trim() !== "") && !isNaN(quantity);
+
+        if (quantity === "") {
+            return;
+        }
+
+        if (!isNumeric) {
+            quantity = parseInt(quantity) || 1;
+        }
+
+        this.inputElement.value = Math.max(this.inputElement.min || 0, Math.min(quantity, this.inputElement.max || Number.MAX_VALUE)).toString();
+    }
+
+    onValueInput() {
+        this.quantity = this.inputElement.value;
+        this.cartQuantitySelector.disableButtonPlus();
+    }
+
+    onValueChanged() {
+        if (this.inputElement.value === "") {
+            this.quantity = 1;
+        }
+        if (this.quantity >= 1) {
+            this.cartQuantitySelector.debouncedOnChange();
+        } else {
+            this.removeFromCartButton = this.cartItem.querySelector("[data-remove-from-cart-button]");
+
+            if (this.removeFromCartButton) {
+                this.cartItems.removeFromCart(this.removeFromCartButton.href);
+            }
+        }
+    }
+}
+
+if (!window.customElements.get("cart-quantity-input")) {
+    window.customElements.define("cart-quantity-input", CartQuantityInput);
+}
+
+class CartItems extends HTMLElement {
+    constructor() {
+        super();
+
+        this.section = this.closest(".shopify-section");
+        this.sectionId = extractSectionId(this);
+
+        document.addEventListener("product:added", () => {
+            this.onCartUpdate();
+        });
+    }
+
+    onCartChange(variantId, quantity) {
+        this.enableLoading(true);
+
+        const body = JSON.stringify({
+            id: variantId,
+            quantity: quantity
+        });
+
+        fetch(window.Shopify.routes.root + 'cart/change.js', {
+                ...fetchConfig(),
+                ...{
+                    body
+                }
+            })
+            .then(() => {
+                this.onCartUpdate();
+            })
+            .catch(e => {
+                console.error(e);
+            });
+    }
+
+    onCartUpdate() {
+        this.enableLoading(true);
+
+        fetch(`${window.routes.root_url}?section_id=${this.sectionId}`)
+            .then((response) => response.text())
+            .then((responseText) => {
+                const html = new DOMParser().parseFromString(responseText, 'text/html');
+                const cartItemsHtml = html.querySelector('cart-items');
+
+                this.innerHTML = cartItemsHtml.innerHTML;
+
+                const cartSection = cartItemsHtml.closest(".shopify-section");
+                const priceValue = cartSection.querySelector("[data-cart-price]");
+                const countValue = cartSection.querySelector("[data-cart-count]");
+
+                this.updateElementInnerHtml(priceValue.innerHTML, "[data-cart-price]");
+
+                if (+countValue.innerHTML > 0) {
+                    this.updateElementInnerHtml(countValue.innerHTML, "[data-cart-count]", false);
+                } else {
+                    this.updateElementInnerHtml(0, "[data-cart-count]", false);
+                }
+
+                this.enableLoading(false);
+                document.dispatchEvent(new CustomEvent("cart-drawer:open"));
+            })
+            .catch(e => {
+                console.error(e);
+                this.enableLoading(false);
+            });
+    }
+
+    updateElementInnerHtml(value, selector, hideOnEmpty) {
+        this.element = this.section.querySelector(selector);
+
+        if (!this.element) return;
+
+        this.element.innerHTML = value;
+
+        if (hideOnEmpty === true) {
+            if (!this.element.classList.contains("hidden")) {
+                this.element.classList.add("hidden");
+            }
+        } else {
+            if (this.element.classList.contains("hidden")) {
+                this.element.classList.remove("hidden");
+            }
+        }
+    }
+
+    removeFromCart(url) {
+        this.enableLoading(true);
+
+        fetch(url).then(() => {
+            this.onCartUpdate();
+        }).catch(e => {
+            console.error(e);
+        });
+    }
+
+    enableLoading(enable) {
+        this.spinnerElement = this.section.querySelector(".js-modal-spinner");
+
+        if (!this.spinnerElement) return;
+
+        if (enable === true) {
+            if (this.spinnerElement.classList.contains("show")) return;
+
+            this.spinnerElement.classList.add("show");
+        } else {
+            if (!this.spinnerElement.classList.contains("show")) return;
+
+            this.spinnerElement.classList.remove("show");
+        }
+    }
+}
+
+if (!window.customElements.get("cart-items")) {
+    window.customElements.define("cart-items", CartItems);
+}
+
+class CartRemoveButton extends HTMLElement {
+    constructor() {
+        super();
+    }
+
+    connectedCallback() {
+        this.cartItems = this.closest("cart-items");
+        this.linkElement = this.querySelector("[data-remove-from-cart-button]");
+        this.linkElement.addEventListener("click", (e) => {
+            e.preventDefault();
+            this.cartItems.removeFromCart(this.linkElement.href);
+        });
+    }
+}
+
+if (!window.customElements.get("cart-remove-button")) {
+    window.customElements.define("cart-remove-button", CartRemoveButton);
+}
+
+class CartDrawerButtonOpen extends HTMLElement {
+    constructor() {
+        super();
+    }
+
+    connectedCallback() {
+        const isDrawer = document.querySelector(".cart-drawer") ? true : false;
+
+        if (isDrawer === true) {
+            this.button = this.querySelector("[data-cart-drawer-button-open]");
+            this.button.setAttribute("data-open-modal", "basket-modal");
+
+            this.button.addEventListener("click", (e) => {
+                e.preventDefault();
+                document.dispatchEvent(new CustomEvent("cart-drawer:open"));
+            })
+        }
+    }
+}
+
+if (!window.customElements.get("cart-drawer-button-open")) {
+    window.customElements.define("cart-drawer-button-open", CartDrawerButtonOpen);
+}
+
+class CartDrawerButtonClose extends HTMLElement {
+    constructor() {
+        super();
+    }
+
+    connectedCallback() {
+        this.buttonElement = this.querySelector("[data-cart-drawer-close-button]");
+        this.buttonElement.addEventListener("click", () => {
+            document.dispatchEvent(new CustomEvent("cart-drawer:close"));
+        })
+    }
+}
+
+if (!window.customElements.get("cart-drawer-button-close")) {
+    window.customElements.define("cart-drawer-button-close", CartDrawerButtonClose);
 }

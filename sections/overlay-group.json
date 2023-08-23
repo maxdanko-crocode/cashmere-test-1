@@ -2,7 +2,11 @@
     "name": "Overlay group",
     "type": "header",
     "sections": {
+      "cart-drawer": {
+        "type": "cart-drawer"
+      }
     },
     "order": [
+      "cart-drawer"
     ]
   }

@@ -14,12 +14,15 @@
     }
 
     .size-guide__heading {
-        position: relative;
+        position: sticky;
+        top: 0;
+        z-index: 1;
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 20px;
         padding: 26px 32px 24px;
+        background-color: $primary-background-color;
 
         .paragraph {
             line-height: normal;
@@ -47,6 +50,7 @@
         max-width: 556px;
         z-index: $z-index-modal;
         height: 100vh;
+        overflow: auto;
     }
 
     .size-guide__backdrop {
@@ -75,8 +79,7 @@
     }
 
     .size-guide__wrapper {
-        overflow: auto;
-        height: calc(100% - 68px);
+        height: 100%;
     }
 
     .size-guide__wrapper-content {
@@ -234,6 +237,12 @@
             left: 50%;
             transform: translate(-50%, -50%);
             border-radius: 50%;
+            transition-duration: 0.3s;
+            transition-property: background-color;
+            transition-timing-function: ease;
+            -webkit-transition: background-color 0.3s ease;
+            -moz-transition: background-color 0.3s ease;
+            -o-transition: background-color 0.3s ease;
         }
     }
 
