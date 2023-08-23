@@ -1139,13 +1139,45 @@ button:focus-visible,
   justify-content: space-between;
   gap: 20px;
 }
-.size-guide .size-guide__selector-dropdown {
+.size-guide .size-guide__selector-dropdown-wrapper {
   position: relative;
-  width: 100%;
-  max-width: 245px;
   display: flex;
-  padding: 16px;
+  max-width: 245px;
+  width: 100%;
   border: 1px solid #F6F5F3;
+}
+.size-guide .size-guide-selector-dropdown__icon-wrapper {
+  pointer-events: none;
+  position: absolute;
+  right: 29px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.size-guide .size-guide-selector-dropdown__icon-wrapper svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(90deg);
+}
+.size-guide .size-guide__selector-dropdown {
+  width: 100%;
+  padding: 16px;
+  /* for Firefox */
+  -moz-appearance: none;
+  /* for Chrome */
+  -webkit-appearance: none;
+}
+.size-guide .size-guide__selector-dropdown::-ms-expand {
+  display: none;
+}
+@media (-moz-touch-enabled: 0), (hover: hover) {
+  .size-guide .size-guide__selector-dropdown:hover {
+    cursor: pointer;
+  }
 }
 .size-guide .size-guide__selector-checkboxes {
   display: flex;

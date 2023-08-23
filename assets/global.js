@@ -951,51 +951,106 @@ class SizeGuideConverter extends HTMLElement {
 
     connectedCallback() {
         this.content = this.querySelector("[data-size-guide-content]");
+        this.select = this.querySelector("[data-size-guide-select]");
+        this.sizeInputs = this.querySelectorAll("[data-size]");
+        this.tables = this.content.querySelectorAll("table");
+        this.cacheList = this.getCacheList();
+        this.countries = [];
+
+        this.cacheList.forEach(cache => {
+            this.countries.push(cache.split("-")[0]);
+        });
+
+        const countrySet = new Set(this.countries);
+
+        this.initSelectOptions(countrySet);
+        this.initTables();
+        this.renderTable();
 
         this.addEventListener("change", (event) => {
-            if (event.target.closest("[data-size]")) {
-                const target = event.target.closest("[data-size]");
-                const type = target.getAttribute("data-size");
-
-                this.convertTo(type);
+            if (event.target.closest("[data-size-change]")) {
+                this.renderTable();
             }
-        })
+        });
     }
 
-    convertTo(type) {
-        const trs = this.content.querySelectorAll("tr");
-        console.log(window.translations.product.sizeGuide.inc);
-        console.log(window.translations.product.sizeGuide.cm);
+    getCacheList() {
+        const cacheArray = [];
+        const newCacheArray = [];
 
-        trs.forEach(tr => {
-            if (tr !== trs[0]) {
-                const tds = tr.querySelectorAll("td");
-                
-                tds.forEach(td => {
-                    if (td !== tds[0]) {
-                        const innerText = td.innerHTML.split(" ");
-                        const sizeValue = innerText[0];
-                        const doubleValue = sizeValue.split("-");
-                        doubleValue.forEach(value => {
-                            const inc = this.getInc(+value);
-                            console.log(inc);
-                        })
-                    }
-                })
+        this.tables.forEach(table => {
+            const cachedElement = table.querySelectorAll("td")[0];
+            
+            if (cachedElement.innerText.includes("#")) {
+                cacheArray.push(cachedElement.innerText);
             }
         });
 
-        if (type === "inc") {
-            
-        } else {
+        cacheArray.forEach(cache => {
+            const cacheItems = cache.split("#");
 
-        }
+            if (cacheItems[1]) {
+                newCacheArray.push(cacheItems[1]);
+            }
+        })
+
+        return newCacheArray;
     }
 
-    getInc(value) {
-        if (typeof value === "number") {
-            return Math.round((value * 0.39) * 100) / 100;
-        }
+    initSelectOptions(countries) {
+        countries.forEach(country => {
+            const option = document.createElement("option");
+            option.value = country;
+            option.innerHTML = country.toUpperCase();
+            option.setAttribute("data-size-country", country);
+            this.select.appendChild(option);
+        });
+    }
+
+    initTables() {
+        this.tables.forEach(table => {
+            const tds = table.querySelectorAll("td");
+
+            if (!table.classList.contains("hidden")) {
+                table.classList.add("hidden");
+            }
+
+            tds.forEach(td => {
+                if (td.innerText.includes('#')) {
+                    const splittedValue = td.innerText.split("#");
+                    const clearedValue = splittedValue[0];
+                    const valueToData = splittedValue[1];
+
+                    td.innerText = clearedValue;
+                    table.setAttribute("data-size-country-type", valueToData);
+                }
+            });
+        })
+    }
+
+    renderTable() {
+        const country = this.select.value;
+        const type = this.getType();
+
+        this.tables.forEach(table => {
+            const dataValue = table.getAttribute("data-size-country-type");
+
+            if (dataValue === `${country}-${type}`) {
+                if (table.classList.contains("hidden")) {
+                    table.classList.remove("hidden");
+                }
+            } else {
+                if (!table.classList.contains("hidden")) {
+                    table.classList.add("hidden");
+                }
+            }
+        });
+    }
+
+    getType() {
+        const inputs = [...this.sizeInputs].filter((input) => input.checked);
+
+        return inputs[0].dataset.size;
     }
 }
 
