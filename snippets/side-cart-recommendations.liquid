@@ -1,0 +1,60 @@
+{{- "sidebar-recommendations.css" | asset_url | stylesheet_tag -}}
+
+<div class="sidebar-recommendations" data-sidebar-recommendations>
+    <h6 class="sidebar-recommendations__title">
+        YOU'LL ALSO LOVE
+    </h6>
+
+    <div class="sidebar-recommendations__list">
+        {%- for selected_product in product_list -%}
+            {%- assign image    = selected_product.featured_image -%}
+            {%- assign title    = selected_product.title -%}
+            {%- assign variant  = selected_product.selected_or_first_available_variant -%}
+            {%- assign price    = selected_product.price -%}
+            {%- assign url      = selected_product.url -%}
+
+            {%- capture form_id -%}product-form-{{ selected_product.id }}-{{ section.id }}{%- endcapture -%}
+
+            <div class="sidebar-recommendations__item">
+                <div class="sidebar-recommendations-item__image-wrapper">
+                    <picture>
+                        <img class="sidebar-recommendations-item__image" src="{{- image | img_url: '200x' -}}" alt="{{- image.alt -}}">
+                    </picture>
+
+                    <button class="sidebar-recommendations__item-wishlist button" type="button">
+                        {% render 'icon-heart' %}
+                    </button>
+
+                    {%- form "product", selected_product, class: "sidebar-recommendations__form", id: form_id -%}
+                        <buy-buttons data-form-id="{{- form_id -}}" class="sidebar-recommendations__buy-buttons">
+                            <button class="sidebar-recommendations__buy-button button" type="submit" data-add-to-cart>
+                                <p class="sidebar-recommendations__button-error-text hidden" data-error-message></p>
+
+                                <span class="sidebar-recommendations__button-text paragraph weight weight--regular">
+                                    Add now
+                                </span>
+                            </button>
+                        </buy-buttons>
+
+                        <div class="hidden">
+                            {% render 'product-options'
+                            product: product,
+                            options: product.options_with_values,
+                            current_variant: variant,
+                            size_guide: size_guide,
+                            form_id: form_id,
+                            change_history_state: true,
+                            section: section %}
+                        </div>
+                    {%- endform -%}
+                </div>
+                <a href="{{- url -}}" class="sidebar-recommendations__item-title weight weight--regular">
+                    {{- title -}}
+                </a>
+                <span class="sidebar-recommendations__item-price paragraph text-upper">
+                    {% render 'price', price_value: price %}
+                </span>
+            </div>
+        {%- endfor -%}
+    </div>
+</div>

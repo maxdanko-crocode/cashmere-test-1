@@ -1,16 +1,17 @@
-.counter {
+.cart-counter {
     display: flex;
     align-items: center;
     border: 1px solid $placeholder-outline;
     max-width: max-content;
+    height: 33px;
 
     .counter__button {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 30px;
-        height: 52px;
-        padding: 10px;
+        width: 21px;
+        height: 100%;
+        background-color: transparent;
         transition-property: background-color, color;
         transition-duration: 0.3s;
         transition-timing-function: ease;
@@ -23,10 +24,15 @@
         &.disabled {
             pointer-events: none;
         }
+
+        svg {
+            width: 7px;
+            height: 7px;
+        }
     }
 
     .counter__input {
-        max-width: 60px;
+        max-width: 28px;
         appearance: none;
         border: none;
         text-align: center;

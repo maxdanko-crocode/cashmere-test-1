@@ -5,9 +5,9 @@
     quantity - line item quantity
 {%- endcomment -%}
 
-<cart-quantity-selector class="counter">
+<cart-quantity-selector class="cart-counter">
     <button aria-label="{{- "general.buttons.minus" | t -}}" 
-        class="counter__minus js-minus-button" 
+        class="counter__button js-minus-button" 
         type="button"
     >
         {% render "icon-minus" %}
@@ -15,7 +15,7 @@
     <label>
         <cart-quantity-input>
             <input data-cart-quantity-input 
-                class="counter__number" 
+                class="counter__input" 
                 type="text" 
                 inputmode="numeric" 
                 value="{{- quantity -}}" 
@@ -24,7 +24,7 @@
         </cart-quantity-input>
     </label>
     <button aria-label="{{- "general.buttons.plus" | t -}}" 
-        class="counter__plus js-plus-button{%- if quantity == max_value %} disabled{%- endif -%}" 
+        class="counter__button js-plus-button{%- if quantity == max_value %} disabled{%- endif -%}" 
         type="button"
         {%- if quantity == max_value %} disabled{%- endif -%}
     >

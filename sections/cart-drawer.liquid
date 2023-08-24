@@ -1,6 +1,9 @@
 {%- assign color_swatches_config = settings.color_swatches_config | newline_to_br | split: '<br />'-%}
 {%- assign color_labels = 'color,colour,couleur,cor,colore,farbe,색,色,カラー,färg,farve,szín,barva' | split: ',' -%}
 
+{%- assign product_list = section.settings.product_list -%}
+{%- assign form_id = section.id | prepend: 'form--'  -%}
+
 {%- if template.name != "cart" -%}
     {{- "cart-drawer.css" | asset_url | stylesheet_tag -}}
 
@@ -10,44 +13,53 @@
             data-modal-oveflow
             class="cart-drawer-wrapper"
         >
-            {%- form 'cart', cart, class: "cart-drawer__modal", data-cart-drawer-form: true -%}
-                <div class="cart-drawer__heading">
-                    <div class="cart-drawer__heading-text">
-                        <div class="cart-drawer__heading-icon-wrapper">
-                            {% render 'icon-cart' %}
+            <div class="cart-drawer__modal">
+                {%- if product_list != blank -%}
+                    {% render 'side-cart-recommendations', product_list: product_list, product_form_id: form_id %}
+                {%- endif -%}
+
+                {%- form 'cart', cart, class: "cart-drawer__modal-form", data-cart-drawer-form: true -%}
+                    <div class="cart-drawer__modal-wrapper">
+                        <div class="cart-drawer__heading">
+                            <div class="cart-drawer__heading-text">
+                                <div class="cart-drawer__heading-icon-wrapper">
+                                    {% render 'icon-cart' %}
+                                </div>
+                                <div class="cart-drawer__title paragraph text-upper weight weight--regular">
+                                    <span>My bag</span>
+                                    <span class="dot"></span>
+                                    <span data-cart-count>
+                                        {%- if cart.item_count == 1 -%}
+                                            {{- cart.item_count }} item
+                                        {%- else -%}
+                                            {{- cart.item_count }} items
+                                        {%- endif -%}
+                                    </span>
+                                </div>
+                            </div>
+                            <button class="cart-drawer__close-button" type="button" data-modal-close-button>
+                                {% render "icon-cross" %}
+                            </button>
                         </div>
-                        <div class="cart-drawer__title paragraph text-upper weight weight--regular">
-                            <span>My bag</span>
-                            <span class="dot"></span>
-                            <span data-cart-count>
-                                {%- if cart.item_count == 1 -%}
-                                    {{- cart.item_count }} item
-                                {%- else -%}
-                                    {{- cart.item_count }} items
-                                {%- endif -%}
-                            </span>
+
+                        {% render 'cart-items', line_items: cart.items, container_class: "cart-drawer__items" %}
+                        
+                        <div class="cart-drawer__bottom">
+                            <button class="cart-drawer__button button"
+                                name="checkout"
+                                type="submit">
+                                    <span class="text-upper">
+                                        Checkout
+                                    </span>
+                                    <span class="dot"></span>
+                                    <span data-cart-price>
+                                        {% render "price", price_value: cart.total_price %}
+                                    </span>
+                            </button>
                         </div>
                     </div>
-                    <button class="cart-drawer__close-button" type="button" data-modal-close-button>
-                        {% render "icon-cross" %}
-                    </button>
-                </div>
-
-                {% render 'cart-items', line_items: cart.items, container_class: "cart-drawer__items" %}
-                <div class="cart-drawer__bottom">
-                    <button class="cart-drawer__button button"
-                        name="checkout"
-                        type="submit">
-                            <span class="text-upper">
-                                Checkout
-                            </span>
-                            <span class="dot"></span>
-                            <span data-cart-price>
-                                {% render "price", price_value: cart.total_price %}
-                            </span>
-                    </button>
-                </div>
-            {%- endform -%}
+                {%- endform -%}
+            </div>
             <div class="cart-drawer__backdrop" data-modal-backdrop></div>
         </modal-container>
     </section>
@@ -56,6 +68,12 @@
 {% schema %}
     {
         "name": "Cart drawer",
-        "settings": []
+        "settings": [
+            {
+                "type": "product_list",
+                "id": "product_list",
+                "label": "Sizebar recommendations"
+            }
+        ]
     }
 {% endschema %}

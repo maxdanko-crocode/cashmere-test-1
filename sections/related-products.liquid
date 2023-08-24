@@ -18,30 +18,33 @@
           class="container related-products__container"
           data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ products_to_show }}"
   >
-    <div class="related-products__wrapper">
-      <div class="related-products__top-row">
-        <h2 class="related-products__heading">
-          {{- heading -}}
-        </h2>
-      </div>
-
-      <div class="related-products__list">
-        {{- products_list -}}
-      </div>
-
-      {%- if link_label != blank -%}
-        <div class="related-products__footer">
-          <a href="{{- url -}}" class="related-products__button button">
-            <span class="related-products__button-text paragraph weight weight--regular">
-              {{- link_label -}}
-            </span>
-          </a>
+    {%- if recommendations.products != blank -%}
+      <div class="related-products__wrapper">
+        <div class="related-products__top-row">
+          <h2 class="related-products__heading">
+            {{- heading -}}
+          </h2>
         </div>
-      {%- endif -%}
 
-    </div>
+        <div class="related-products__list">
+          {{- products_list -}}
+        </div>
+
+        {%- if link_label != blank -%}
+          <div class="related-products__footer">
+            <a href="{{- url -}}" class="related-products__button button">
+              <span class="related-products__button-text paragraph weight weight--regular">
+                {{- link_label -}}
+              </span>
+            </a>
+          </div>
+        {%- endif -%}
+
+      </div>
+    {%- endif -%}
   </product-recommendations>
 </section>
+
 {% schema %}
 {
   "name": "Recommendations",

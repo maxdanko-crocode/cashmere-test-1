@@ -14,6 +14,22 @@ class ModalContainer extends HTMLElement {
             }
         })
 
+        document.addEventListener("click", (event) => {
+            const eventTarget = event.target;
+
+            if (eventTarget.closest("[data-cart-drawer-button-open]")) {
+                const recommendations = this.querySelector("[data-sidebar-recommendations]");
+                
+                if (recommendations) {
+                    if (!recommendations.classList.contains("move-left")) {
+                        setTimeout(() => {
+                            recommendations.classList.add("move-left")
+                        }, 300)
+                    }
+                }
+            }
+        })
+
         document.addEventListener("modals:open", (event) => {
             const modalId = event.detail.modalId;
 

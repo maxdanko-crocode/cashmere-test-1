@@ -34,35 +34,37 @@
                     {%- endif -%}
                 </div>
                 <div class="cart-item__body">
-                    <div class="cart-item__heading">
-                        <a class="cart-item__title" href="{{- url -}}">
-                            {{- title -}}
-                        </a>
-                        <span>
-                            {%- if original_price != final_price -%}
-                                <span class="">
-                                    {{- final_price | money -}}
-                                </span>
-
-                                <span class="">
-                                    {{- original_price | money -}}
-                                </span>
-                            {%- else -%}
-                                <span class="">
-                                    {{- original_price | money -}}
-                                </span>
-                        {%- endif -%}
-                        </span>
-                    </div>
-
-                    {%- if line_item.product.has_only_default_variant == false -%}
-                        <div class="cart-item__options">
-                            {%- for option in options -%}
-                                <span class="cart-item__option">{{- option.name -}}: <span>{{ option.value -}}</span></span>
-                            {%- endfor -%}
+                    <div class="cart-item__body-top">
+                        <div class="cart-item__heading">
+                            <a class="cart-item__title text-upper" href="{{- url -}}">
+                                {{- title -}}
+                            </a>
+                            <span class="cart-item__prices text-upper">
+                                {%- if original_price != final_price -%}
+                                    <span class="">
+                                        {{- final_price | money -}}
+                                    </span>
+    
+                                    <span class="">
+                                        {{- original_price | money -}}
+                                    </span>
+                                {%- else -%}
+                                    <span class="">
+                                        {{- original_price | money -}}
+                                    </span>
+                            {%- endif -%}
+                            </span>
                         </div>
-                    {%- endif -%}
-
+    
+                        {%- if line_item.product.has_only_default_variant == false -%}
+                            <div class="cart-item__options">
+                                {%- for option in options -%}
+                                    <span class="cart-item__option">{{- option.name -}}: <span>{{ option.value -}}</span></span>
+                                {%- endfor -%}
+                            </div>
+                        {%- endif -%}
+                    </div>
+                   
                     <div class="cart-item__body-bottom">
                         {%- assign current_variant_inventory = null -%}
 
@@ -77,14 +79,14 @@
                         <cart-remove-button class="no-js-hidden">
                             <a href="{{- line_item.url_to_remove -}}"
                                 data-remove-from-cart-button 
-                                class="js-remove-from-cart-button"
+                                class="cart-item__remove-button extra-small text-upper js-remove-from-cart-button"
                             >
                                 Remove
                             </a>
                         </cart-remove-button>
 
                         <noscript>
-                            <a href="{{- line_item.url_to_remove -}}" class="js-remove-from-cart-button">
+                            <a href="{{- line_item.url_to_remove -}}" class="cart-item__remove-button extra-small text-upper js-remove-from-cart-button">
                                 Remove
                             </a>
                         </noscript>
