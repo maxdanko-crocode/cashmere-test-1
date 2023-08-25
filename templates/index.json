@@ -3,11 +3,10 @@
     "dca4f646-42ea-41d8-a110-093382a5ad52": {
       "type": "featured-products",
       "settings": {
-        "heading": "Featured products",
+        "heading": "Featured product",
         "products_to_show": 5,
         "product_list": [
-          "croopped-everyday-open-cardigan",
-          "cropped-stripe-crew"
+          "croopped-everyday-open-cardigan"
         ]
       }
     }

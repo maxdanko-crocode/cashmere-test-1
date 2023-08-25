@@ -8,7 +8,9 @@
 
 {%- capture products_list -%}
     {% for featured_product in featured_products limit: products_to_show %}
-        {%- render "product-card", product: featured_product -%}
+        <div class="featured-products__item">
+            {%- render "product-card", product: featured_product -%}
+        </div>
     {% endfor %}
 {%- endcapture -%}
 

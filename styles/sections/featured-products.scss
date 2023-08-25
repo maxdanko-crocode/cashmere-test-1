@@ -7,12 +7,19 @@
   .featured-products__wrapper {
     display: flex;
     flex-direction: column;
-    row-gap: 40px;
+    gap: 40px;
   }
 
   .featured-products__list {
     display: flex;
-    column-gap: 32px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px;
+  }
+
+  .featured-products__item {
+    width: 100%;
+    max-width: 400px;
   }
 
   .featured-products__heading {
