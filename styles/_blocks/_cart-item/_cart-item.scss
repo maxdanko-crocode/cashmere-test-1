@@ -43,7 +43,15 @@
     .cart-item__heading {
         display: flex;
         justify-content: space-between;
-        gap: 20px;
+        flex-direction: column;
+        gap: 10px;
+        padding-bottom: 5px;
+
+        @include breakpoint(large) {
+            flex-direction: row;
+            gap: 20px;
+            padding-bottom: 0;
+        }
     }
 
     .cart-item__title {

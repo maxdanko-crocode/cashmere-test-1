@@ -35,10 +35,6 @@
         display: flex;
     }
 
-    .header-search__field-wrapper {
-
-    }
-
     .header-logo__link {
         display: flex;
         width: 100%;
@@ -115,6 +111,7 @@
         gap: 40px;
         overflow: auto;
         scrollbar-width: 0;
+        scroll-snap-type: x mandatory;
 
         &::-webkit-scrollbar {
             width: 0;
@@ -125,6 +122,8 @@
     .header-bottom__list-item {
         font-size: 15px;
         display: flex;
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
     }
 
     .header-bottom-list-item__link {

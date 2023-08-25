@@ -1,8 +1,9 @@
 {%- assign color_swatches_config = settings.color_swatches_config | newline_to_br | split: '<br />'-%}
 {%- assign color_labels = 'color,colour,couleur,cor,colore,farbe,색,色,カラー,färg,farve,szín,barva' | split: ',' -%}
-
-{%- assign product_list = section.settings.product_list -%}
-{%- assign form_id = section.id | prepend: 'form--'  -%}
+{%- assign product_list     = section.settings.product_list -%}
+{%- assign drawer_products  = section.settings.drawer_products -%}
+{%- assign form_id          = section.id | prepend: 'form--'  -%}
+{%- assign cart_form_id     = section.id | prepend: 'cart-form--'  -%}
 
 {%- if template.name != "cart" -%}
     {{- "cart-drawer.css" | asset_url | stylesheet_tag -}}
@@ -13,12 +14,12 @@
             data-modal-oveflow
             class="cart-drawer-wrapper"
         >
-            <div class="cart-drawer__modal">
-                {%- if product_list != blank -%}
-                    {% render 'side-cart-recommendations', product_list: product_list, product_form_id: form_id %}
-                {%- endif -%}
+            {%- if product_list != blank -%}
+                {% render 'side-cart-recommendations', product_list: product_list, product_form_id: form_id %}
+            {%- endif -%}
 
-                {%- form 'cart', cart, class: "cart-drawer__modal-form", data-cart-drawer-form: true -%}
+            <div class="cart-drawer__modal">
+                {%- form 'cart', cart, class: "cart-drawer__modal-form", id: cart_form_id, data-cart-drawer-form: true -%}
                     <div class="cart-drawer__modal-wrapper">
                         <div class="cart-drawer__heading">
                             <div class="cart-drawer__heading-text">
@@ -43,22 +44,25 @@
                         </div>
 
                         {% render 'cart-items', line_items: cart.items, container_class: "cart-drawer__items" %}
-                        
-                        <div class="cart-drawer__bottom">
-                            <button class="cart-drawer__button button"
-                                name="checkout"
-                                type="submit">
-                                    <span class="text-upper">
-                                        Checkout
-                                    </span>
-                                    <span class="dot"></span>
-                                    <span data-cart-price>
-                                        {% render "price", price_value: cart.total_price %}
-                                    </span>
-                            </button>
-                        </div>
                     </div>
                 {%- endform -%}
+
+                {% render 'drawer-slider', selected_product_list: drawer_products %}
+
+                <div class="cart-drawer__bottom">
+                    <button class="cart-drawer__button button"
+                        name="checkout"
+                        form="{{- cart_form_id -}}"
+                        type="submit">
+                            <span class="text-upper">
+                                Checkout
+                            </span>
+                            <span class="dot"></span>
+                            <span data-cart-price>
+                                {% render "price", price_value: cart.total_price %}
+                            </span>
+                    </button>
+                </div>
             </div>
             <div class="cart-drawer__backdrop" data-modal-backdrop></div>
         </modal-container>
@@ -72,7 +76,12 @@
             {
                 "type": "product_list",
                 "id": "product_list",
-                "label": "Sizebar recommendations"
+                "label": "Sidebar recommendations"
+            },
+            {
+                "type": "product_list",
+                "id": "drawer_products",
+                "label": "Bottom slider products"
             }
         ]
     }

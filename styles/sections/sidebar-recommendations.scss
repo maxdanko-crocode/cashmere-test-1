@@ -2,8 +2,9 @@
 
 .sidebar-recommendations {
     display: none;
-    position: absolute;
-    right: 100%;
+    position: fixed;
+    top: 0;
+    right: 556px;
     width: 100%;
     height: 100%;
     flex-direction: column;
@@ -12,6 +13,7 @@
     background-color: $primary-background-color;
     padding: 30px 26px;
     border-right: 1px solid $border-primary;
+    z-index: calc($z-index-modal + 1);
 
     &.move-left {
         @include breakpoint(large) {
@@ -41,10 +43,12 @@
         display: flex;
         flex-direction: column;
 
-        &:hover {
-            .sidebar-recommendations__form {
-                display: flex;
-                animation: animation-opacity 0.3s ease;
+        @include breakpoint(large) {
+            &:hover {
+                .sidebar-recommendations__form {
+                    display: flex;
+                    animation: animation-opacity 0.3s ease;
+                }
             }
         }
     }

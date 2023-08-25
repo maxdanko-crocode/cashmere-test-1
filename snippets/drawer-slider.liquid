@@ -1,0 +1,17 @@
+{{- "drawer-slider.css" | asset_url | stylesheet_tag -}}
+
+<slider-component class="drawer-slider" data-swiper-option-name="cart-product-slider">
+    <h6 class="drawer-slider__title text-upper">
+        A little something extra
+    </h6>
+
+    <div class="drawer-slider__list swiper" data-swiper-element>
+        <div class="swiper-wrapper">
+            {%- for cart_selected_product in selected_product_list -%}
+                <div class="drawer-slider__item swiper-slide">
+                    {% render 'quick-add-product-card', product: cart_selected_product %}
+                </div>
+            {%- endfor -%}
+        </div>
+    </div>
+</slider-component>

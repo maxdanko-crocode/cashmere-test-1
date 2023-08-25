@@ -18,6 +18,11 @@
   max-width: 556px;
   z-index: 1002;
   height: 100vh;
+  overflow: auto;
+  scrollbar-width: 0;
+}
+.cart-drawer .cart-drawer__modal::-webkit-scrollbar {
+  width: 0;
 }
 .cart-drawer .cart-drawer__modal-form {
   height: 100%;
@@ -36,6 +41,11 @@
   flex-direction: column;
   width: 100%;
   height: 100%;
+  overflow: auto;
+  scrollbar-width: 0;
+}
+.cart-drawer .cart-drawer__modal-wrapper::-webkit-scrollbar {
+  width: 0;
 }
 .cart-drawer .cart-drawer__backdrop {
   position: fixed;
@@ -108,6 +118,7 @@
   padding: 0;
 }
 .cart-drawer .cart-drawer__items {
+  position: relative;
   display: flex;
   flex-direction: column;
   max-height: 420px;
@@ -118,12 +129,23 @@
 .cart-drawer .cart-drawer__items::-webkit-scrollbar {
   width: 0;
 }
+.cart-drawer .cart-drawer__items::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 64px);
+  height: 1px;
+  background-color: #000000;
+  opacity: 0.1;
+}
 .cart-drawer .cart-drawer__bottom {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   flex-grow: 1;
-  padding: 0 32px 20px;
+  padding: 30px 32px 20px;
 }
 .cart-drawer .cart-drawer__button {
   width: 100%;

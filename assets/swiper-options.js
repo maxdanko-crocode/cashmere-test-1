@@ -1,5 +1,12 @@
 const swiperOptions = [
     {
+        name: "cart-product-slider",
+        options: {
+            loop: false,
+            direction: "horizontal"
+        }
+    },
+    {
         name: "main-product-slider",
         options: {
             loop: false,

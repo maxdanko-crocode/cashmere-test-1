@@ -6,6 +6,68 @@
   row-gap: 14px;
   word-break: break-word;
 
+
+  &.product-card--quick-add {
+    .product-card__form {
+      position: absolute;
+      bottom: 10px;
+      
+    }
+
+    @include breakpoint(large) {
+      &:not(:hover) {
+        .product-card__form {
+            display: none;
+        }
+      }
+
+      &:hover {
+        .product-card__form {
+            display: flex;
+            animation: animation-opacity 0.3s ease;
+        }
+      }
+    }
+
+    .product-card__form {
+      display: flex;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 0;
+      width: 100%;
+      padding: 12px 10px;
+    }
+
+    .product-card__buy-buttons {
+      width: 100%;
+    }
+
+    .product-card__buy-button {
+      width: 100%;
+      padding: 9px 6px;
+      background-color: $tertiary-button-background;
+      color: $secondary-button-text-color;
+
+      @include hover {
+        background-color: $primary-button-background;
+        color: $primary-button-text-color;
+      }
+    }
+
+    .product-card__button-error-text:not(.hidden) ~ .product-card__button-text {
+      display: none;
+    }
+
+    .product-card__option {
+      display: none;
+
+      @include breakpoint(large) {
+        display: block;
+      }
+    }
+  }
+
   .product-card__option-list {
     display: flex;
     flex-wrap: wrap;
@@ -19,12 +81,17 @@
     justify-content: center;
 
     &.product-card__option-label--color {
-      width: 30px;
-      height: 30px;
+      width: 20px;
+      height: 20px;
       border-radius: 50%;
       border: var(--border, 1px solid $placeholder-outline);
       background-color: $white;
       filter: drop-shadow(0px 0px 0px $placeholder-outline) drop-shadow(0px 0px 0px $white);
+
+      @include breakpoint(large) {
+        width: 30px;
+        height: 30px;
+      }
     }
 
     &:not(.product-card__option-label--color) {
