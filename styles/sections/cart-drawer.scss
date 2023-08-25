@@ -166,6 +166,10 @@
             background-color: $tertiary-background-color;
             opacity: 0.1;
         }
+
+        &.cart-drawer__items--full-height {
+            max-height: 710px;
+        }
     }
 
     .cart-drawer__bottom {

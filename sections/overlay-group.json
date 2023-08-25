@@ -1,12 +1,26 @@
 {
-    "name": "Overlay group",
-    "type": "header",
-    "sections": {
-      "cart-drawer": {
-        "type": "cart-drawer"
+  "name": "Overlay group",
+  "type": "header",
+  "sections": {
+    "cart-drawer": {
+      "type": "cart-drawer",
+      "settings": {
+        "product_list": [
+          "basic-sweatpant",
+          "basic-sweatpant-1",
+          "classic-wide-leg-ankle-pant",
+          "classic-wide-leg-ankle-pant-1"
+        ],
+        "drawer_products": [
+          "cropped-stripe-crew",
+          "cropped-stripe-crew-1",
+          "ribbed-wide-leg-pant",
+          "ribbed-wide-leg-pant-1"
+        ]
       }
-    },
-    "order": [
-      "cart-drawer"
-    ]
-  }
+    }
+  },
+  "order": [
+    "cart-drawer"
+  ]
+}

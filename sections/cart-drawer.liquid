@@ -38,16 +38,24 @@
                                     </span>
                                 </div>
                             </div>
-                            <button class="cart-drawer__close-button" type="button" data-modal-close-button>
+                            <button class="cart-drawer__close-button close-button-scale" type="button" data-modal-close-button>
                                 {% render "icon-cross" %}
                             </button>
                         </div>
 
-                        {% render 'cart-items', line_items: cart.items, container_class: "cart-drawer__items" %}
+                        {% assign class = "cart-drawer__items" %}
+
+                        {%- if drawer_products == blank -%}
+                            {%- assign class = "cart-drawer__items cart-drawer__items--full-height" -%}
+                        {%- endif -%}
+
+                        {% render 'cart-items', line_items: cart.items, container_class: class %}
                     </div>
                 {%- endform -%}
 
-                {% render 'drawer-slider', selected_product_list: drawer_products %}
+                {%- if drawer_products != blank -%}
+                    {% render 'drawer-slider', selected_product_list: drawer_products %}
+                {%- endif -%}
 
                 <div class="cart-drawer__bottom">
                     <button class="cart-drawer__button button"

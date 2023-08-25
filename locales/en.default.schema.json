@@ -835,6 +835,23 @@
         "name": "Featured collection"
       }
     },
+    "featured-products": {
+      "name": "Featured products",
+      "settings": {
+        "heading": {
+          "label": "Heading"
+        },
+        "products_to_show": {
+          "label": "Products to show"
+        },
+        "product_list": {
+          "label": "Products"
+        }
+      },
+      "presets": {
+        "name": "Featured products"
+      }
+    },
     "featured-product": {
       "name": "Featured product",
       "blocks": {

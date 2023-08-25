@@ -145,3 +145,18 @@ picture {
 		border-radius: 50%;
 	}
 }
+
+.close-button-scale {
+	transition: transform 0.1s ease;
+	-webkit-transition: transform 0.1s ease;
+    -moz-transition: transform 0.1s ease;
+    -o-transition: transform 0.1s ease;
+
+	@include hover {
+		transform: scale(1.3);
+	}
+
+	&:active {
+		transform: scale(1.1);
+	}
+}

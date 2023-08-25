@@ -140,6 +140,9 @@
   background-color: #000000;
   opacity: 0.1;
 }
+.cart-drawer .cart-drawer__items.cart-drawer__items--full-height {
+  max-height: 710px;
+}
 .cart-drawer .cart-drawer__bottom {
   display: flex;
   flex-direction: column;
