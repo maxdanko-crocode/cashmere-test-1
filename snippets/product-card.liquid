@@ -72,10 +72,10 @@
             {%- endunless -%}
 
             <p class="product-card__price">
-                <span {% if compare_at_price > price -%}class="product-card__price--actual-at-price"{%- endif -%}>{{- price | money -}}</span>
+                <span {% if compare_at_price > price -%}class="product-card__price--actual-at-price"{%- endif -%}>{{- price | money_without_trailing_zeros -}}</span>
 
                 {%- if compare_at_price > price -%}
-                    <span class="product-card__price--compare-at-price">{{- compare_at_price | money -}}</span>
+                    <span class="product-card__price--compare-at-price">{{- compare_at_price | money_without_trailing_zeros -}}</span>
                 {%- endif -%}
             </p>
 

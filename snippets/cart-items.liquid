@@ -42,15 +42,15 @@
                             <span class="cart-item__prices text-upper">
                                 {%- if original_price != final_price -%}
                                     <span class="">
-                                        {{- final_price | money -}}
+                                        {{- final_price | money_without_trailing_zeros -}}
                                     </span>
     
                                     <span class="">
-                                        {{- original_price | money -}}
+                                        {{- original_price | money_without_trailing_zeros -}}
                                     </span>
                                 {%- else -%}
                                     <span class="">
-                                        {{- original_price | money -}}
+                                        {{- original_price | money_without_trailing_zeros -}}
                                     </span>
                             {%- endif -%}
                             </span>

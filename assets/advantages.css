@@ -3,6 +3,15 @@
   padding-top: 62px;
   padding-bottom: 75px;
 }
+.advantages .advantages__img {
+  display: flex;
+  width: 24px;
+  height: 24px;
+}
+.advantages .advantages__img svg {
+  width: 100%;
+  height: 100%;
+}
 .advantages .advantages__list {
   display: flex;
   justify-content: center;
@@ -18,7 +27,7 @@
 }
 .advantages .advantages__item {
   gap: 15px;
-  max-width: 232px;
+  max-width: 237px;
 }
 .advantages .advantages__content {
   gap: 10px;

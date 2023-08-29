@@ -1,7 +1,7 @@
 .counter {
     display: flex;
     align-items: center;
-    border: 1px solid $placeholder-outline;
+    border: 1px solid $border-primary;
     max-width: max-content;
 
     .counter__button {
@@ -14,6 +14,7 @@
         transition-property: background-color, color;
         transition-duration: 0.3s;
         transition-timing-function: ease;
+        background-color: transparent;
 
         @include hover {
             background-color: $placeholder-outline;

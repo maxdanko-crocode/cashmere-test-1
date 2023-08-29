@@ -14,8 +14,17 @@
     gap: 10px;
   }
 
+  .main-product__vendor {
+    letter-spacing: 1.4px;
+  }
+
   .main-product__title {
     margin-top: 5px;
+    letter-spacing: 1px;
+
+    @include breakpoint(large) {
+      max-width: 360px;
+    }
   }
 
   .main-product-gallery__main {
@@ -150,7 +159,11 @@
   .main-product__price-top {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 10px;
+  }
+
+  .main-product__inventory {
+    letter-spacing: 1.2px;
   }
 
   .main-product__price-text {
@@ -199,6 +212,8 @@
   }
 
   .main-product__option-title {
+    letter-spacing: 1.2px;
+
     &.main-product__option-title--button {
       background-color: transparent;
       padding: 0;
@@ -243,6 +258,9 @@
     -webkit-transition: border 0.3s ease;
     -moz-transition: border 0.3s ease;
     -o-transition: border 0.3s ease;
+    letter-spacing: 1.2px;
+    font-size: 12px;
+    font-weight: 500;
 
     @include hover {
       cursor: pointer;
@@ -252,7 +270,7 @@
       width: 50px;
       height: 50px;
       border-radius: 50%;
-      border: 1px solid $placeholder-outline;
+      border: 1px solid $border-primary;
       padding: 5px;
       background-color: $white;
       filter: drop-shadow(0px 0px 0px $placeholder-outline) drop-shadow(0px 0px 0px $white);
@@ -261,7 +279,7 @@
     &:not(.main-product__option-label--color) {
       min-width: 44px;
       height: 44px;
-      border: 1px solid $placeholder-outline;
+      border: 1px solid $border-primary;
     }
 
     .main-product__option-label-fill {

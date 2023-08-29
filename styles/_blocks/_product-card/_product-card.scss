@@ -6,6 +6,9 @@
   row-gap: 14px;
   word-break: break-word;
 
+  @include breakpoint(large) {
+    row-gap: 25px;
+  }
 
   &.product-card--quick-add {
     .product-card__form {
@@ -84,9 +87,9 @@
       width: 20px;
       height: 20px;
       border-radius: 50%;
-      border: var(--border, 1px solid $placeholder-outline);
+      border: var(--border, 1px solid $border-primary);
       background-color: $white;
-      filter: drop-shadow(0px 0px 0px $placeholder-outline) drop-shadow(0px 0px 0px $white);
+      filter: drop-shadow(0px 0px 0px $border-primary) drop-shadow(0px 0px 0px $white);
 
       @include breakpoint(large) {
         width: 30px;
@@ -97,7 +100,7 @@
     &:not(.product-card__option-label--color) {
       min-width: 44px;
       height: 44px;
-      border: 1px solid $placeholder-outline;
+      border: 1px solid $border-primary;
     }
 
     .product-card__option-label-fill {
@@ -222,7 +225,7 @@
 .product-card__image-wrapper {
   position: relative;
   width: 100%;
-  padding-top: 131.25%;
+  padding-top: 150.6%;
   background-color: $secondary-background-color;
 }
 
@@ -240,6 +243,9 @@
   transform: translateX(-50%);
   max-width: max-content;
 
+  @include breakpoint(large) {
+    max-width: 140px;
+  }
 }
 
 .product-card__image--secondary {

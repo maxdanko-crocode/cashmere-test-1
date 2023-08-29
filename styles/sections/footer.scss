@@ -89,7 +89,7 @@
     .footer-newsletter__label {
         display: flex;
         align-items: center;
-        padding: 17px 22px;
+        padding: 16px 22px;
         border: 1px solid $tertiary-background-color;
     }
 
@@ -100,6 +100,8 @@
         -webkit-appearance: none;
         appearance: none;
         border: none;
+        padding: 0;
+        font-size: 14px;
     }
 
     .footer-newsletter__button {
@@ -191,5 +193,9 @@
         display: flex;
         align-items: center;
         gap: 4px;
+    }
+
+    .footer-bottom__text-row {
+        
     }
 }

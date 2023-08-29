@@ -284,12 +284,12 @@
       "taxes_included": "Taxes included",
       "vendor": "Product vendor: {{ vendor }}",
       "buttons": {
-        "add_to_cart": "Add to cart",
+        "add_to_cart": "ADD TO BAG",
         "sold_out": "Sold out",
         "unavailable": "Unavailable"
       },
       "inventory": {
-        "available": "{{ quantity }} available",
+        "available": "In stock",
         "in_stock": "In stock",
         "in_stock_quantity_html": "{{ quantity }}",
         "out_of_stock": "Out of stock"

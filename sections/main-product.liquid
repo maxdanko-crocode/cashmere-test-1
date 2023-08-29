@@ -18,7 +18,7 @@
             open
         >
             <summary class="main-product-collapse-row-opener__text">
-                <span class="subtitle subtitle--weight-medium text-upper paragraph">
+                <span class="weight weight--medium text-upper paragraph">
                     Details
                 </span>
                 <span class="main-product-collapse-row-opener__icon-wrapper"></span>
@@ -45,7 +45,7 @@
                 data-dropdown-opener
             >
                 <summary class="main-product-collapse-row-opener__text">
-                    <span class="subtitle subtitle--weight-medium text-upper paragraph">
+                    <span class="weight weight--medium text-upper paragraph">
                         {{- collapsible_row_title -}}
                     </span>
                     <span class="main-product-collapse-row-opener__icon-wrapper"></span>
@@ -70,12 +70,12 @@
 
     <div class="main-product__wrapper">
         <div class="main-product__wrapper-inner">
-            <div class="main-product__row">
+            <div class="main-product__row main-product__vendor">
                 <p class="text-apper">
                     {{- product.vendor -}}
                 </p>
                 <button class="button close-button-scale" type="button">
-                    {% render 'icon-heart' %}
+                    {% render 'icon-heart-secondary' %}
                 </button>
             </div>
 

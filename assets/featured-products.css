@@ -2,6 +2,9 @@
   padding-top: 40px;
   padding-bottom: 40px;
 }
+.featured-products .product-card__image {
+  max-width: max-content;
+}
 .featured-products .featured-products__wrapper {
   display: flex;
   flex-direction: column;

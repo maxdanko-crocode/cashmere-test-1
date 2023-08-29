@@ -4,16 +4,16 @@
     variant -- variant object 
 {%- endcomment -%}
 
-<product-inventory data-form-id="{{- form_id -}}" class="main-product__margin-top">
+<product-inventory data-form-id="{{- form_id -}}">
     {%- if variant.available -%}
         {%- if variant.inventory_management and variant.inventory_policy == 'deny' -%}
             {%- capture quantity -%}
-                <span class="main-product__text main-product__text--tertiary">{{- "sections.product.inventory.available" | t: quantity: variant.inventory_quantity -}}</span>
+                <span class="main-product__inventory main-product__text main-product__text--tertiary">{{- "sections.product.inventory.available" | t: quantity: variant.inventory_quantity -}}</span>
             {%- endcapture -%}
             <span data-quantity-wrapper>{{- "sections.product.inventory.in_stock_quantity_html" | t: quantity: quantity -}}</span>
         {%- else -%}
             {%- if variant.inventory_quantity <= 0 -%}
-                <span class="main-product__text main-product__text--tertiary" data-quantity-wrapper>{{- "sections.product.inventory.in_stock" | t -}}</span>
+                <span class="main-product__inventory main-product__text main-product__text--tertiary" data-quantity-wrapper>{{- "sections.product.inventory.in_stock" | t -}}</span>
             {%- endif -%}
         {%- endif -%}
     {%- else -%}

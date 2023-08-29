@@ -810,7 +810,7 @@ button:focus-visible,
 .counter {
   display: flex;
   align-items: center;
-  border: 1px solid #a8a8a8;
+  border: 1px solid #DDDDDD;
   max-width: max-content;
 }
 .counter .counter__button {
@@ -823,6 +823,7 @@ button:focus-visible,
   transition-property: background-color, color;
   transition-duration: 0.3s;
   transition-timing-function: ease;
+  background-color: transparent;
 }
 @media (-moz-touch-enabled: 0), (hover: hover) {
   .counter .counter__button:hover {
@@ -898,6 +899,11 @@ button:focus-visible,
   row-gap: 14px;
   word-break: break-word;
 }
+@media (min-width: 992px) {
+  .product-card {
+    row-gap: 25px;
+  }
+}
 .product-card.product-card--quick-add .product-card__form {
   position: absolute;
   bottom: 10px;
@@ -961,9 +967,9 @@ button:focus-visible,
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: var(--border, 1px solid #a8a8a8);
+  border: var(--border, 1px solid #DDDDDD);
   background-color: #ffffff;
-  filter: drop-shadow(0px 0px 0px #a8a8a8) drop-shadow(0px 0px 0px #ffffff);
+  filter: drop-shadow(0px 0px 0px #DDDDDD) drop-shadow(0px 0px 0px #ffffff);
 }
 @media (min-width: 992px) {
   .product-card .product-card__option-label.product-card__option-label--color {
@@ -974,7 +980,7 @@ button:focus-visible,
 .product-card .product-card__option-label:not(.product-card__option-label--color) {
   min-width: 44px;
   height: 44px;
-  border: 1px solid #a8a8a8;
+  border: 1px solid #DDDDDD;
 }
 .product-card .product-card__option-label .product-card__option-label-fill {
   width: 100%;
@@ -1093,7 +1099,7 @@ button:focus-visible,
 .product-card__image-wrapper {
   position: relative;
   width: 100%;
-  padding-top: 131.25%;
+  padding-top: 150.6%;
   background-color: #F6F5F3;
 }
 
@@ -1110,6 +1116,11 @@ button:focus-visible,
   transition-timing-function: ease;
   transform: translateX(-50%);
   max-width: max-content;
+}
+@media (min-width: 992px) {
+  .product-card__image {
+    max-width: 140px;
+  }
 }
 
 .product-card__image--secondary {

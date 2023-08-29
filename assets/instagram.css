@@ -5,6 +5,9 @@
   padding-right: 16px;
   padding-bottom: 20px;
 }
+.instagram .instagram__subheading {
+  letter-spacing: 1.4px;
+}
 .instagram .instagram__header {
   display: flex;
   flex-direction: column;
@@ -38,7 +41,7 @@
 }
 .instagram .instagram__image-wrapper {
   position: relative;
-  padding-bottom: 101%;
+  padding-bottom: 100%;
   display: flex;
 }
 .instagram .instagram__image {

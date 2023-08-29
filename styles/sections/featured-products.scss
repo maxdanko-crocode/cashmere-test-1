@@ -4,6 +4,10 @@
   padding-top: 40px;
   padding-bottom: 40px;
 
+  .product-card__image {
+    max-width: max-content;
+  }
+
   .featured-products__wrapper {
     display: flex;
     flex-direction: column;
