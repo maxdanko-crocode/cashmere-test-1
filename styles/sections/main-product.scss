@@ -438,9 +438,14 @@
         background: rgba(0, 0, 0, 0.40);
       }
     }
+
+    p {
+      font-weight: 300;
+    }
   }
 
   product-inventory {
     letter-spacing: 1.2px;
+    opacity: 0.6;
   }
 }

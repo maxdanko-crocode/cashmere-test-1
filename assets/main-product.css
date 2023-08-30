@@ -374,6 +374,10 @@
     background: rgba(0, 0, 0, 0.4);
   }
 }
+.main-product .main-product-collapse-row__content p {
+  font-weight: 300;
+}
 .main-product product-inventory {
   letter-spacing: 1.2px;
+  opacity: 0.6;
 }

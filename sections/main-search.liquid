@@ -20,7 +20,6 @@
   }
 
   .template-search__search {
-    margin: 0 auto 3.5rem;
     max-width: 74.1rem;
   }
 
@@ -64,13 +63,13 @@
 {%- endstyle -%}
 
 {% paginate search.results by 24 %}
-  <div class="template-search{% unless search.performed and search.results_count > 0 %} template-search--empty{% endunless %} section-{{ section.id }}-padding">
+  <div class=" container template-search{% unless search.performed and search.results_count > 0 %} template-search--empty{% endunless %} section-{{ section.id }}-padding">
     <div class="template-search__header page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
       <h1 class="h2 center">
         {%- if search.performed -%}
-          {{- 'templates.search.title' | t -}}
+          Search
         {%- else -%}
-          {{- 'general.search.search' | t -}}
+          Search
         {%- endif -%}
       </h1>
       <div class="template-search__search">
@@ -80,29 +79,33 @@
             <main-search>
               <form action="{{ routes.search_url }}" method="get" role="search" class="search">
                 <div class="field">
-                  <input
-                    class="search__input field__input"
-                    id="Search-In-Template"
-                    type="search"
-                    name="q"
-                    value="{{ search.terms | escape }}"
-                    placeholder="{{ 'general.search.search' | t }}"
-                    {%- if settings.predictive_search_enabled -%}
-                      role="combobox"
-                      aria-expanded="false"
-                      aria-owns="predictive-search-results"
-                      aria-controls="predictive-search-results"
-                      aria-haspopup="listbox"
-                      aria-autocomplete="list"
-                      autocorrect="off"
-                      autocomplete="off"
-                      autocapitalize="off"
-                      spellcheck="false"
-                    {%- endif -%}
-                  >
-                  <label class="field__label" for="Search-In-Template">{{ 'general.search.search' | t }}</label>
-                  <input name="options[prefix]" type="hidden" value="last">
-
+                  
+                  <div style="display: flex; gap: 10px;">
+                    <input
+                      class="input"
+                      id="Search-In-Template"
+                      type="search"
+                      name="q"
+                      value="{{ search.terms | escape }}"
+                      placeholder="I'm looking for..."
+                      style="border:1px solid black; padding: 10px;"
+                      {%- if settings.predictive_search_enabled -%}
+                        role="combobox"
+                        aria-expanded="false"
+                        aria-owns="predictive-search-results"
+                        aria-controls="predictive-search-results"
+                        aria-haspopup="listbox"
+                        aria-autocomplete="list"
+                        autocorrect="off"
+                        autocomplete="off"
+                        autocapitalize="off"
+                        spellcheck="false"
+                      {%- endif -%}
+                    >
+                    <label class="field__label" style="display: flex; padding: 10px; border: 1px solid black; cursor: pointer; background-color: black; color: white;" for="Search-In-Template">Submit</label>
+                    <input name="options[prefix]" type="hidden" value="last">
+                  </div>
+                 
                   {%- if settings.predictive_search_enabled -%}
                     <div class="predictive-search predictive-search--search-template" tabindex="-1" data-predictive-search>
                       <div class="predictive-search__loading-state">
@@ -140,7 +143,7 @@
           {%- endif -%}
         {%- endunless -%}
         {%- if search.results_count == 0 and search.filters == empty -%}
-          <p role="status">{{ 'templates.search.no_results' | t: terms: search.terms }}</p>
+          <p role="status">No results</p>
         {%- endif -%}
       {%- endif -%}
     </div>
