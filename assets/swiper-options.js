@@ -3,7 +3,8 @@ const swiperOptions = [
         name: "cart-product-slider",
         options: {
             loop: false,
-            direction: "horizontal"
+            direction: "horizontal",
+            mousewheel: true
         }
     },
     {

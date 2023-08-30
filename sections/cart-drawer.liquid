@@ -29,7 +29,7 @@
                                 <div class="cart-drawer__title paragraph text-upper weight weight--regular">
                                     <span>My bag</span>
                                     <span class="dot"></span>
-                                    <span data-cart-count>
+                                    <span data-cart-count="{{- cart.item_count }}">
                                         {%- if cart.item_count == 1 -%}
                                             {{- cart.item_count }} item
                                         {%- else -%}

@@ -176,3 +176,7 @@
   align-items: center;
   gap: 4px;
 }
+.footer .footer-bottom__text-row {
+  font-family: "Poppins";
+  font-weight: 400;
+}

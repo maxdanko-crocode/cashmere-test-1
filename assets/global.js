@@ -52,7 +52,7 @@ function formatMoney(cents, format) {
             break;
     }
 
-    return formatString.replace(placeholderRegex, value);
+    return formatString.replace(placeholderRegex, value).replace(".00", "");
 }
 
 function getUrlWithVariant(url, id) {
@@ -1248,10 +1248,11 @@ class CartItems extends HTMLElement {
 
                 const cartSection = cartItemsHtml.closest(".shopify-section");
                 const priceValue = cartSection.querySelector("[data-cart-price]");
-                const countValue = cartSection.querySelector("[data-cart-count]");
+                const countValueElement = cartSection.querySelector("[data-cart-count]");
+                const countValue = countValueElement.getAttribute("data-cart-count");
 
                 this.updateElementInnerHtml(priceValue.innerHTML, "[data-cart-price]");
-                this.updateElementInnerHtml(countValue.innerHTML, "[data-cart-count]", false);
+                this.updateElementInnerHtml(countValueElement.innerHTML, "[data-cart-count]", false);
 
                 this.enableLoading(false);
                 document.dispatchEvent(new CustomEvent("modals:open", {
@@ -1259,6 +1260,8 @@ class CartItems extends HTMLElement {
                         modalId: "cart-drawer--modal"
                     }
                 }));
+                
+                document.dispatchEvent(new CustomEvent("cart:updated", { detail: { count: countValue }}));
             })
             .catch(e => {
                 console.error(e);
@@ -1311,6 +1314,26 @@ class CartItems extends HTMLElement {
 
 if (!window.customElements.get("cart-items")) {
     window.customElements.define("cart-items", CartItems);
+}
+
+class CartItemsCount extends HTMLElement {
+    constructor() {
+        super()
+    }
+
+    connectedCallback() {
+        document.addEventListener("cart:updated", (event) => {
+            const count = event.detail.count;
+
+            if (count) {
+                this.innerHTML = count;
+            }
+        });
+    }
+}
+
+if (!window.customElements.get("cart-items-count")) {
+    window.customElements.define("cart-items-count", CartItemsCount);
 }
 
 class CartRemoveButton extends HTMLElement {

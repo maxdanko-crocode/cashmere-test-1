@@ -3,9 +3,7 @@
 .instagram {
   display: flex;
   flex-direction: column;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-bottom: 20px;
+  padding: 20px 16px;
 
   .instagram__subheading {
     letter-spacing: 1.4px;
@@ -13,6 +11,7 @@
 
   .instagram__header {
     display: flex;
+    gap: 10px;
     flex-direction: column;
 
     @include breakpoint(large) {

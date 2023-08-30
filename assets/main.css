@@ -931,7 +931,7 @@ button:focus-visible,
 }
 .product-card.product-card--quick-add .product-card__buy-button {
   width: 100%;
-  padding: 9px 6px;
+  padding: 17px 6px;
   background-color: #FFFFFF;
   color: #000000;
 }
@@ -1286,6 +1286,16 @@ button:focus-visible,
 }
 .size-guide .size-guide__wrapper-content td {
   padding: 16px;
+}
+.size-guide .size-guide__wrapper-content h1, .size-guide .size-guide__wrapper-content h2, .size-guide .size-guide__wrapper-content h3, .size-guide .size-guide__wrapper-content h4, .size-guide .size-guide__wrapper-content h5, .size-guide .size-guide__wrapper-content h6 {
+  font-weight: 400;
+  margin-bottom: 6px;
+}
+.size-guide .size-guide__wrapper-content h5 {
+  font-size: 20px;
+}
+.size-guide .size-guide__wrapper-content p {
+  font-size: 16px;
 }
 .size-guide .size-guide__image {
   width: 100%;

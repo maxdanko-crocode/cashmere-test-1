@@ -75,6 +75,11 @@
     gap: 8px;
   }
 }
+@media (min-width: 992px) {
+  .header .header-static__item.header-static__item--mobile {
+    display: none;
+  }
+}
 .header .header-static__item * {
   pointer-events: none;
 }

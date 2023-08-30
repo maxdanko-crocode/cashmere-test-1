@@ -104,6 +104,19 @@
         td {
             padding: 16px;
         }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 400;
+            margin-bottom: 6px;
+        }
+
+        h5 {
+            font-size: 20px;
+        }
+
+        p {
+            font-size: 16px;
+        }
     }
 
     .size-guide__image {

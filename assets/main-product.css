@@ -1,5 +1,6 @@
 .main-product {
   display: grid;
+  padding-bottom: 20px;
 }
 @media (min-width: 992px) {
   .main-product {

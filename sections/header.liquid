@@ -51,6 +51,11 @@
             {{- logo -}}
         </div> 
         <div class="header-static">
+            <a href="{{- routes.search_url -}}" class="header-static__item header-static__item--mobile">
+                <div class="header-static__item-icon">
+                    {% render 'icon-magnify' %}
+                </div>
+            </a>
             <a class="header-static__item" href="#">
                 <div class="header-static__item-icon">
                     {% render 'icon-locator' %}
@@ -79,7 +84,7 @@
                             {% render 'icon-cart' %}
                         </div>
                         <p class="header-static__item-text">
-                            Cart({{- cart.currency.symbol -}})
+                            Cart(<cart-items-count>{{- cart.item_count -}}</cart-items-count>)
                         </p>
                     </button>
                 </button-open-modal>
