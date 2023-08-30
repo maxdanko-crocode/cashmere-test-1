@@ -48,13 +48,17 @@
 
     .product-card__buy-button {
       width: 100%;
-      padding: 17px 6px;
+      padding: 9px 6px;
       background-color: $tertiary-button-background;
       color: $secondary-button-text-color;
 
       @include hover {
         background-color: $primary-button-background;
         color: $primary-button-text-color;
+      }
+
+      @include breakpoint(large) {
+        padding: 17px 6px;
       }
     }
 
@@ -181,14 +185,6 @@
 
 .product-card__wishlist {
     background: none;
-    transition: transform 0.1s ease;
-    -webkit-transition: transform 0.1s ease;
-    -moz-transition: transform 0.1s ease;
-    -o-transition: transform 0.1s ease;
-
-    @include hover {
-      transform: scale(1.3);
-    }
 
     &:active {
       transform: scale(1.1);

@@ -931,7 +931,7 @@ button:focus-visible,
 }
 .product-card.product-card--quick-add .product-card__buy-button {
   width: 100%;
-  padding: 17px 6px;
+  padding: 9px 6px;
   background-color: #FFFFFF;
   color: #000000;
 }
@@ -939,6 +939,11 @@ button:focus-visible,
   .product-card.product-card--quick-add .product-card__buy-button:hover {
     background-color: #000000;
     color: #FFFFFF;
+  }
+}
+@media (min-width: 992px) {
+  .product-card.product-card--quick-add .product-card__buy-button {
+    padding: 17px 6px;
   }
 }
 .product-card.product-card--quick-add .product-card__button-error-text:not(.hidden) ~ .product-card__button-text {
@@ -1054,15 +1059,6 @@ button:focus-visible,
 
 .product-card__wishlist {
   background: none;
-  transition: transform 0.1s ease;
-  -webkit-transition: transform 0.1s ease;
-  -moz-transition: transform 0.1s ease;
-  -o-transition: transform 0.1s ease;
-}
-@media (-moz-touch-enabled: 0), (hover: hover) {
-  .product-card__wishlist:hover {
-    transform: scale(1.3);
-  }
 }
 .product-card__wishlist:active {
   transform: scale(1.1);
@@ -1273,10 +1269,15 @@ button:focus-visible,
   padding: 20px 32px;
 }
 .size-guide .size-guide__wrapper-content table {
+  display: flex;
   font-size: 14px;
   font-weight: 400;
   line-height: 16px;
   letter-spacing: 0.56px;
+  overflow: auto;
+}
+.size-guide .size-guide__wrapper-content tbody {
+  width: 100%;
 }
 .size-guide .size-guide__wrapper-content tr {
   border: 1px solid #F6F5F3;
@@ -1286,6 +1287,8 @@ button:focus-visible,
 }
 .size-guide .size-guide__wrapper-content td {
   padding: 16px;
+  white-space: nowrap;
+  width: 100%;
 }
 .size-guide .size-guide__wrapper-content h1, .size-guide .size-guide__wrapper-content h2, .size-guide .size-guide__wrapper-content h3, .size-guide .size-guide__wrapper-content h4, .size-guide .size-guide__wrapper-content h5, .size-guide .size-guide__wrapper-content h6 {
   font-weight: 400;
@@ -1357,7 +1360,12 @@ button:focus-visible,
 .size-guide .size-guide__selector-checkboxes {
   display: flex;
   flex-wrap: wrap;
-  gap: 40px;
+  gap: 10px;
+}
+@media (min-width: 992px) {
+  .size-guide .size-guide__selector-checkboxes {
+    gap: 40px;
+  }
 }
 .size-guide .size-guide__selector-group {
   display: flex;

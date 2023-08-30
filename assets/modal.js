@@ -39,10 +39,6 @@ class ModalContainer extends HTMLElement {
             }
         })
 
-        window.addEventListener("resize", () => {
-            this.showModal(false);
-        });
-
         document.addEventListener("keyup", (event) => event.code.toUpperCase() === 'ESCAPE' && this.showModal(false));
     }
 

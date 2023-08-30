@@ -1,15 +1,11 @@
 @import "../_utils/utils";
 
 .sidebar-recommendations {
-    display: none;
-    position: fixed;
-    top: 0;
-    right: 556px;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100%;
-    flex-direction: column;
     gap: 26px;
-    max-width: 202px;
     background-color: $primary-background-color;
     padding: 30px 26px;
     border-right: 1px solid $border-primary;
@@ -22,6 +18,33 @@
         }
     }
 
+    &:not(.sidebar-recommendations--mobile) {
+        display: none;
+
+        @include breakpoint(large) {
+            display: flex;
+            position: fixed;
+            top: 0;
+            right: 556px;
+            max-width: 202px;
+        }
+
+        .sidebar-recommendations__list {
+            flex-direction: column;
+        }
+    }
+
+    &:is(.sidebar-recommendations--mobile) {
+        @include breakpoint(large) {
+            display: none;
+        }
+
+        .sidebar-recommendations__item {
+            width: 30%;
+            min-width: 160px;
+        }
+    }
+
     .sidebar-recommendations__title {
         line-height: normal;
         letter-spacing: 1.4px;
@@ -29,7 +52,6 @@
 
     .sidebar-recommendations__list {
         display: flex;
-        flex-direction: column;
         gap: 18px;
         scrollbar-width: 0;
         overflow: auto;
@@ -43,7 +65,19 @@
         display: flex;
         flex-direction: column;
 
+        
+
+        .sidebar-recommendations__form {
+            display: flex;
+        }
+
         @include breakpoint(large) {
+            &:not(:hover) {
+                .sidebar-recommendations__form {
+                    display: none;
+                }
+            }
+
             &:hover {
                 .sidebar-recommendations__form {
                     display: flex;

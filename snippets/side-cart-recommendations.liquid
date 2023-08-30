@@ -1,6 +1,6 @@
 {{- "sidebar-recommendations.css" | asset_url | stylesheet_tag -}}
 
-<div class="sidebar-recommendations" data-sidebar-recommendations>
+<div class="sidebar-recommendations {%- if mobile %} sidebar-recommendations--mobile{%- endif -%} " data-sidebar-recommendations>
     <h6 class="sidebar-recommendations__title">
         YOU'LL ALSO LOVE
     </h6>
@@ -21,7 +21,7 @@
                         <img class="sidebar-recommendations-item__image" src="{{- image | img_url: '200x' -}}" alt="{{- image.alt -}}">
                     </picture>
 
-                    <button class="sidebar-recommendations__item-wishlist button" type="button">
+                    <button class="sidebar-recommendations__item-wishlist button close-button-scale" type="button">
                         {% render 'icon-heart' %}
                     </button>
 

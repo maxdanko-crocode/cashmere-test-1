@@ -87,10 +87,16 @@
         padding: 20px 32px;
 
         table {
+            display: flex;
             font-size: 14px;
             font-weight: 400;
             line-height: 16px;
             letter-spacing: 0.56px;
+            overflow: auto;
+        }
+
+        tbody {
+            width: 100%;
         }
 
         tr {
@@ -103,6 +109,8 @@
 
         td {
             padding: 16px;
+            white-space: nowrap;
+            width: 100%;
         }
 
         h1, h2, h3, h4, h5, h6 {
@@ -186,7 +194,11 @@
     .size-guide__selector-checkboxes {
         display: flex;
         flex-wrap: wrap;
-        gap: 40px;
+        gap: 10px;
+
+        @include breakpoint(large) {
+            gap: 40px;
+        }
     }
 
     .size-guide__selector-group {
