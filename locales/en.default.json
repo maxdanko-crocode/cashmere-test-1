@@ -289,10 +289,10 @@
         "unavailable": "Unavailable"
       },
       "inventory": {
-        "available": "In stock",
-        "in_stock": "In stock",
+        "available": "IN STOCK",
+        "in_stock": "IN STOCK",
         "in_stock_quantity_html": "{{ quantity }}",
-        "out_of_stock": "Out of stock"
+        "out_of_stock": "OUT OF STOCK"
       },
       "quantity": {},
       "gallery": {

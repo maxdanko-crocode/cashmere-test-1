@@ -13,7 +13,7 @@
 }
 @media (min-width: 992px) {
   .header .header-logo {
-    margin-left: 90px;
+    margin-left: 105px;
   }
 }
 .header .header-search:not(.header-search--mobile) {
@@ -51,6 +51,11 @@
   border: none;
   padding: 0;
 }
+@media (min-width: 992px) {
+  .header .header-search__field {
+    min-width: 180px;
+  }
+}
 .header .header-static {
   display: flex;
   align-items: center;
@@ -58,7 +63,7 @@
 }
 @media (min-width: 992px) {
   .header .header-static {
-    gap: 20px;
+    gap: 25px;
   }
 }
 .header .header-static__item {

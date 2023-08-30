@@ -23,6 +23,7 @@
 @media (min-width: 992px) {
   .main-product .main-product__title {
     max-width: 360px;
+    padding-right: 15px;
   }
 }
 .main-product .main-product-gallery__main {
@@ -279,6 +280,7 @@
   height: 100%;
   color: currentColor;
   background-color: #000000;
+  letter-spacing: 1.4px;
 }
 @media (-moz-touch-enabled: 0), (hover: hover) {
   .main-product .main-product-buy-buttons__button:hover {
@@ -371,4 +373,7 @@
   .main-product .main-product-collapse-row__content::-webkit-scrollbar-thumb:hover {
     background: rgba(0, 0, 0, 0.4);
   }
+}
+.main-product product-inventory {
+  letter-spacing: 1.2px;
 }

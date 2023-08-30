@@ -5,9 +5,15 @@
   height: 100%;
   gap: 26px;
   background-color: #FFFFFF;
-  padding: 30px 26px;
+  padding: 20px 26px;
   border-right: 1px solid #DDDDDD;
   z-index: 1002;
+  text-align: center;
+}
+@media (min-width: 992px) {
+  .sidebar-recommendations {
+    padding: 30px 26px;
+  }
 }
 @media (min-width: 992px) {
   .sidebar-recommendations.move-left {

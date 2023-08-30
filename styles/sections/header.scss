@@ -16,7 +16,7 @@
         height: 50px;
         
         @include breakpoint(large) {
-            margin-left: 90px;
+            margin-left: 105px;
         }
     }
 
@@ -61,6 +61,10 @@
         appearance: none;
         border: none;
         padding: 0;
+
+        @include breakpoint(large) {
+            min-width: 180px;
+        }
     }
 
     .header-static {
@@ -69,7 +73,7 @@
         gap: 10px;
 
         @include breakpoint(large) {
-            gap: 20px;
+            gap: 25px;
         }
     }
 

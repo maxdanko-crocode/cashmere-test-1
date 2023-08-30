@@ -1286,9 +1286,19 @@ button:focus-visible,
   background-color: #F6F5F3;
 }
 .size-guide .size-guide__wrapper-content td {
-  padding: 16px;
+  padding: 12px 16px;
   white-space: nowrap;
   width: 100%;
+}
+.size-guide .size-guide__wrapper-content td:first-child {
+  width: 95px;
+  min-width: 95px;
+}
+.size-guide .size-guide__wrapper-content td:not(:first-child) {
+  padding: 12px 17px;
+}
+.size-guide .size-guide__wrapper-content td:last-child {
+  padding-right: 10px;
 }
 .size-guide .size-guide__wrapper-content h1, .size-guide .size-guide__wrapper-content h2, .size-guide .size-guide__wrapper-content h3, .size-guide .size-guide__wrapper-content h4, .size-guide .size-guide__wrapper-content h5, .size-guide .size-guide__wrapper-content h6 {
   font-weight: 400;
@@ -1512,6 +1522,7 @@ button:focus-visible,
   justify-content: space-between;
 }
 .cart-item .cart-item__remove-button {
+  letter-spacing: 1.2px;
   opacity: 0.6;
   text-decoration: none;
   transition-duration: 0.3s;
