@@ -3,7 +3,7 @@
   padding-bottom: 40px;
 }
 .featured-products .product-card__image {
-  max-width: max-content;
+  max-width: none;
 }
 .featured-products .featured-products__wrapper {
   display: flex;
