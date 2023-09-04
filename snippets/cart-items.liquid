@@ -57,7 +57,7 @@
                         </div>
     
                         {%- if line_item.product.has_only_default_variant == false -%}
-                            <div class="cart-item__options">
+                            <div class="cart-item__options paragraph">
                                 {%- for option in options -%}
                                     <span class="cart-item__option">{{- option.name -}}: <span>{{ option.value -}}</span></span>
                                 {%- endfor -%}
